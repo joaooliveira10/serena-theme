@@ -1,0 +1,68 @@
+name: CI
+on:
+  push:
+    branches: [main, 'release/**']
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: Enable debug
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  packages: write
+env:
+  GO_VERSION: '1.23'
+  NODE_VERSION: 20
+  IMAGE: ghcr.io/${{ github.repository }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    name: Test (${{ matrix.os }}, go ${{ matrix.go }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        go: ['1.22', '1.23']
+        include:
+          - os: ubuntu-latest
+            coverage: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go }}
+          cache: true
+      - name: Test
+        if: ${{ github.event_name == 'push' && !cancelled() }}
+        run: |
+          go test ./... -race -coverprofile=cover.out
+          echo "sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+        env:
+          CGO_ENABLED: 1
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        run: echo "tags=${{ steps.build.outputs.tags }}" >> $GITHUB_OUTPUT
+        shell: bash
+      - if: failure() && matrix.coverage
+        run: echo "failed"
+  deploy:
+    needs: [test]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - run: echo "${{ toJSON(github.event) }}"

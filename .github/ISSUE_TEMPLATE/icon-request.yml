@@ -1,0 +1,52 @@
+name: Icon request or icon problem
+description: A file or folder has no icon, the wrong icon, or an icon that is hard to read.
+labels: ["icons"]
+body:
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Icon theme
+      multiple: true
+      options:
+        - Serena Icons
+        - Serena Icons Minimal
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is it about?
+      options:
+        - A file or folder has no specific icon
+        - A file or folder has the wrong icon
+        - An icon is hard to read or looks off
+    validations:
+      required: true
+  - type: textarea
+    id: names
+    attributes:
+      label: File or folder names
+      description: Exact names or extensions, one per line. Include the parent folder when it matters (for example `.github/workflows/ci.yml`).
+      placeholder: |
+        turbo.json
+        *.astro
+        .devcontainer/
+    validations:
+      required: true
+  - type: input
+    id: technology
+    attributes:
+      label: Technology
+      description: The tool, framework or language these files belong to, with a link to its website.
+  - type: textarea
+    id: logo
+    attributes:
+      label: Logo (for Serena Icons)
+      description: |
+        Serena Icons only uses a brand's logo when its license and brand guidelines allow it to be recolored and simplified.
+        If you know where the official logo and its usage rules are published, add the links here. Otherwise an original icon will be drawn.
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Optional, for icons that look off.

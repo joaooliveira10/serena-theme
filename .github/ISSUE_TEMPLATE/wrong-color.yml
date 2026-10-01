@@ -1,0 +1,60 @@
+name: Wrong or missing color
+description: A token in the editor has the wrong color, or something in the VS Code interface looks off.
+labels: ["colors"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Serena! The fastest way to fix a color is to know exactly which token it is.
+        In VS Code, put the cursor on the token and run **Developer: Inspect Editor Tokens and Scopes** from the Command Palette, then paste what it shows below.
+  - type: dropdown
+    id: variant
+    attributes:
+      label: Theme
+      multiple: true
+      options:
+        - Serena Dark
+        - Serena Dark Vivid
+        - Serena Light
+        - Serena Light Vivid
+        - Serena High Contrast
+        - Serena High Contrast Light
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Language and extension
+      description: The language of the file, and the extension that provides it if it isn't built in.
+      placeholder: "Rust (rust-analyzer)"
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Code sample
+      description: A small snippet that shows the problem.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: inspect
+    attributes:
+      label: Inspect Editor Tokens and Scopes output
+      description: The textmate scopes and the semantic token type of the token, if any.
+      render: text
+  - type: textarea
+    id: expected
+    attributes:
+      label: What color did you expect?
+      description: For example "this is a function call, it should be blue like other functions".
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Optional. Paste or drag an image here.
+  - type: input
+    id: version
+    attributes:
+      label: VS Code and Serena versions
+      placeholder: "VS Code 1.139.1, Serena 1.0.0"

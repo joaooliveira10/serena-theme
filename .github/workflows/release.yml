@@ -1,0 +1,75 @@
+# Publishes Serena Theme when a tag vX.Y.Z is pushed:
+#   1. regenerates themes/ and icons/ and fails if the committed files are stale
+#   2. packages ONE .vsix
+#   3. publishes that same .vsix to the Visual Studio Marketplace and to Open VSX
+#   4. attaches the .vsix to a GitHub release
+#
+# Secrets (Settings > Environments > release > Environment secrets):
+#   VSCE_PAT  Azure DevOps PAT, Organization "All accessible organizations", scope Marketplace > Manage.
+#             Global PATs stop working on 2026-12-01: switch to the Entra ID block below before that.
+#   OVSX_PAT  Open VSX access token (https://open-vsx.org/user-settings/tokens).
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+# Actions are pinned to full commit SHAs (a tag can be moved, a SHA cannot). Dependabot keeps them up to date.
+permissions:
+  contents: write # create the GitHub release
+  # id-token: write # add back only when switching to the Entra ID option below
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+
+      - name: Tag must match package.json version
+        run: test "v$(node -p "require('./package.json').version")" = "$GITHUB_REF_NAME"
+
+      - name: Generated files must be up to date
+        run: |
+          node build.mjs
+          git diff --exit-code
+
+      - name: Package
+        run: npx --yes @vscode/vsce@3.9.2 package --no-dependencies --out serena-theme.vsix
+
+      # Option A (works until 2026-12-01): PAT stored as a secret.
+      - name: Publish to Visual Studio Marketplace (PAT)
+        run: npx --yes @vscode/vsce@3.9.2 publish --packagePath serena-theme.vsix
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      # Option B (no stored secret; required after 2026-12-01): Microsoft Entra ID.
+      # Needs an Entra app registration or user-assigned managed identity with a federated
+      # credential for this repo (issuer https://token.actions.githubusercontent.com,
+      # subject repo:joaooliveira10/serena-theme:environment:release, audience
+      # api://AzureADTokenExchange), added as a Contributor member of the publisher.
+      # Delete Option A and uncomment:
+      # - uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
+      #   with:
+      #     client-id: ${{ vars.AZURE_CLIENT_ID }}
+      #     tenant-id: ${{ vars.AZURE_TENANT_ID }}
+      #     allow-no-subscriptions: true
+      # - name: Publish to Visual Studio Marketplace (Entra ID)
+      #   run: npx --yes @vscode/vsce@3.9.2 publish --azure-credential --packagePath serena-theme.vsix
+
+      - name: Publish to Open VSX
+        run: npx --yes ovsx@1.2.0 publish serena-theme.vsix
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+
+      - name: GitHub release
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        with:
+          files: serena-theme.vsix
+          generate_release_notes: true

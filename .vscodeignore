@@ -1,0 +1,17 @@
+# Whitelist: package only what VS Code needs at runtime.
+# Everything else (src/, build.mjs, exemplos/, .github/, screenshots, CONTRIBUTING.md...) stays out.
+**
+!package.json
+!README.md
+!CHANGELOG.md
+!LICENSE
+!THIRD_PARTY_NOTICES.md
+!images/icon.png
+!themes/*-color-theme.json
+!icons/*.json
+!icons/dark/*.svg
+!icons/light/*.svg
+!icons/logos/dark/*.svg
+!icons/logos/light/*.svg
+!icons/hc/*.svg
+!icons/logos/hc/*.svg

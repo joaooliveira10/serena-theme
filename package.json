@@ -1,0 +1,106 @@
+{
+  "name": "serena-theme",
+  "displayName": "Serena Theme",
+  "description": "Calm, harmonious color themes (Dark, Dark Vivid, Light, Light Vivid and High Contrast) with one meaning per color across all variants, plus Serena Icons, a matching file and folder icon theme in two editions.",
+  "version": "1.0.0",
+  "publisher": "joaoangello",
+  "license": "MIT",
+  "pricing": "Free",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joaooliveira10/serena-theme"
+  },
+  "bugs": {
+    "url": "https://github.com/joaooliveira10/serena-theme/issues"
+  },
+  "homepage": "https://github.com/joaooliveira10/serena-theme#readme",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#1b1c23",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "color theme",
+    "dark theme",
+    "light theme",
+    "pastel",
+    "soft",
+    "calm",
+    "comfortable",
+    "vivid",
+    "semantic highlighting",
+    "bracket pair colorization",
+    "accessibility",
+    "high contrast",
+    "icon theme",
+    "file icons",
+    "folder icons",
+    "csharp",
+    "java",
+    "typescript",
+    "javascript",
+    "go",
+    "python",
+    "yaml",
+    "tema",
+    "tema escuro",
+    "tema claro",
+    "ícones"
+  ],
+  "vsce": {
+    "dependencies": false
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Serena Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/serena-dark-color-theme.json"
+      },
+      {
+        "label": "Serena Dark Vivid",
+        "uiTheme": "vs-dark",
+        "path": "./themes/serena-dark-vivid-color-theme.json"
+      },
+      {
+        "label": "Serena Light",
+        "uiTheme": "vs",
+        "path": "./themes/serena-light-color-theme.json"
+      },
+      {
+        "label": "Serena Light Vivid",
+        "uiTheme": "vs",
+        "path": "./themes/serena-light-vivid-color-theme.json"
+      },
+      {
+        "label": "Serena High Contrast",
+        "uiTheme": "hc-black",
+        "path": "./themes/serena-high-contrast-color-theme.json"
+      },
+      {
+        "label": "Serena High Contrast Light",
+        "uiTheme": "hc-light",
+        "path": "./themes/serena-high-contrast-light-color-theme.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "serena-icons",
+        "label": "Serena Icons",
+        "path": "./icons/serena-icons.json"
+      },
+      {
+        "id": "serena-icons-minimal",
+        "label": "Serena Icons Minimal",
+        "path": "./icons/serena-icons-minimal.json"
+      }
+    ]
+  }
+}

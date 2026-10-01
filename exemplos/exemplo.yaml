@@ -1,0 +1,89 @@
+%YAML 1.2
+%TAG !e! tag:example.com,2024:
+---
+# Comment line: general YAML features
+name: serena-theme            # trailing comment
+version: 1.4.0
+"quoted key": value
+'single key': 'single ''quoted'' value'
+key with spaces: plain scalar with spaces
+url: https://example.com/path?q=1#frag
+empty:
+null_tilde: ~
+null_word: null
+enabled: true
+disabled: false
+legacy_yes: yes
+legacy_off: Off
+integer: 42
+negative: -17
+float: 3.14159
+exponent: 6.02e+23
+hex: 0x1F
+octal: 0o755
+infinity: .inf
+not_a_number: .NaN
+date: 2024-05-01
+timestamp: 2024-05-01T12:30:00Z
+quoted_number: "42"
+escaped: "line1\nline2\t\"q\" \u00e9"
+tagged_str: !!str 123
+tagged_int: !!int "7"
+custom_tag: !e!widget { size: 3 }
+cfn_ref: !Ref MyBucket
+cfn_sub: !Sub "arn:aws:s3:::${BucketName}/*"
+cfn_getatt: !GetAtt [MyRole, Arn]
+binary: !!binary |
+  R0lGODlhDAAMAIQAAP//9/X17unp5WZmZgAAAOfn515eXvPz7Y6OjuDg4J+fn5
+literal: |
+  line one
+    indented line two
+  line three
+folded: >-
+  folded text that
+  becomes one line
+keep_chomp: |+
+  keep trailing newlines
+
+indent_indicator: |2
+    two extra spaces
+defaults: &defaults
+  adapter: postgres
+  host: localhost
+  port: 5432
+  pool: [1, 2, 3]
+development:
+  <<: *defaults
+  database: dev_db
+test:
+  <<: [*defaults]
+  database: test_db
+anchored_list: &items
+  - apple
+  - banana
+reuse: *items
+inline_map: {a: 1, b: "two", c: [x, y], d: null}
+inline_seq: [1, "two", 3.0, true, ~, {k: v}]
+nested:
+  level1:
+    level2:
+      - id: 1
+        tags: [red, green]
+      - id: 2
+        tags:
+          - blue
+? complex key
+: complex value
+? [a, b]
+: sequence as key
+multi_line_plain: this is a
+  multi line plain scalar
+single_multi: 'it''s
+  folded'
+...
+---
+second_document: true
+list_of_lists:
+  - - a
+    - b
+  - - c

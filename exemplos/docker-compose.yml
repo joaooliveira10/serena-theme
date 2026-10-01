@@ -1,0 +1,54 @@
+# docker-compose.yml
+name: serena-stack
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+      args:
+        GO_VERSION: "1.23"
+    image: ghcr.io/acme/api:${TAG:-latest}
+    container_name: api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - 9090:9090
+    environment:
+      - DATABASE_URL=postgres://app:${POSTGRES_PASSWORD}@db:5432/app?sslmode=disable
+      - LOG_LEVEL=debug
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    command: >
+      sh -c "migrate up &&
+             ./api serve"
+    volumes:
+      - ./data:/var/lib/app:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina no arquivo .env}
+      POSTGRES_DB: app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+volumes:
+  pgdata: {}
+networks:
+  default:
+    name: serena-net
