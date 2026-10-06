@@ -44,7 +44,7 @@ Icons for **284 file types and 101 folders**, with separate versions for dark, l
 2. Color theme: `Ctrl+K Ctrl+T` (**Preferences: Color Theme**) and pick a Serena theme.
 3. Icons: **Preferences: File Icon Theme** in the Command Palette, then **Serena Icons** or **Serena Icons Minimal**.
 
-It also works in [vscode.dev](https://vscode.dev), and it is on [Open VSX](https://open-vsx.org/extension/joaoangello/serena-theme) for VSCodium, Cursor, Windsurf and other editors that use that registry.
+It also works in [vscode.dev](https://vscode.dev), and it is on [Open VSX](https://open-vsx.org/extension/joaoangello/serena-theme) for VSCodium, Cursor and other editors that use that registry.
 
 ## One meaning per color
 

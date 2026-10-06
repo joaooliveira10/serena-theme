@@ -1,6 +1,7 @@
 # Checks every push and pull request:
 #   1. themes/, icons/ and the README "no italics" block were regenerated from src/ (node build.mjs)
 #   2. the extension still packages
+#   3. the release tools (vsce, ovsx) still install under the same npm settings release.yml uses
 name: Validate
 
 on:
@@ -14,6 +15,10 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    # Same npm settings as release.yml, so a dependency that cannot be resolved shows up here first.
+    env:
+      NPM_CONFIG_IGNORE_SCRIPTS: "true"
+      NPM_CONFIG_MIN_RELEASE_AGE: "7"
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -30,3 +35,7 @@ jobs:
 
       - name: Package
         run: npx --yes @vscode/vsce@3.9.2 package --no-dependencies --out serena-theme.vsix
+
+      # Installs the pinned Open VSX CLI and runs it without publishing anything.
+      - name: Open VSX CLI installs
+        run: npx --yes ovsx@1.2.0 --version
