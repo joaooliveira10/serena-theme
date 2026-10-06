@@ -111,11 +111,10 @@ npx ovsx publish serena-theme-1.0.0.vsix -p SEU_TOKEN
 
 ## 3. Automático pelo GitHub (opcional)
 
-O arquivo `.github/workflows/release.yml` publica nas duas lojas quando você envia uma tag:
+O arquivo `.github/workflows/release.yml` roda quando você envia uma tag. Ele sempre cria uma Release no GitHub com o `.vsix` anexado, e publica em cada loja **só se o segredo dela existir**. Sem segredos, você continua enviando o `.vsix` à loja pelo site.
 
-1. No GitHub: **Settings** → **Environments** → **New environment** chamado `release`.
-2. Adicione os segredos `VSCE_PAT` (token do Azure DevOps) e `OVSX_PAT` (token do Open VSX).
-3. Crie e envie a tag com a mesma versão do `package.json`:
+1. Opcional, para publicar automaticamente: no GitHub, **Settings** → **Environments** → `release`, adicione os segredos `VSCE_PAT` (token do Azure DevOps) e/ou `OVSX_PAT` (token do Open VSX) e exija a sua aprovação em **Required reviewers**.
+2. Crie e envie a tag com a mesma versão do `package.json` (troque pelo número da versão):
 
 ```bash
 git tag v1.0.1
@@ -125,4 +124,4 @@ git tag v1.0.1
 git push origin v1.0.1
 ```
 
-O workflow confere a versão, regenera os temas, empacota, publica e anexa o `.vsix` numa Release do GitHub.
+O workflow confere a versão, regenera os temas, empacota, publica nas lojas que tiverem segredo e anexa o `.vsix` numa Release do GitHub.

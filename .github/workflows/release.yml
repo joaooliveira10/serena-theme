@@ -1,10 +1,11 @@
 # Publishes Serena Theme when a tag vX.Y.Z is pushed:
 #   1. regenerates themes/ and icons/ and fails if the committed files are stale
 #   2. packages ONE .vsix
-#   3. publishes that same .vsix to the Visual Studio Marketplace and to Open VSX
+#   3. publishes that same .vsix to the Visual Studio Marketplace and to Open VSX,
+#      each one only if its secret exists (without secrets, upload the .vsix by hand)
 #   4. attaches the .vsix to a GitHub release
 #
-# Secrets (Settings > Environments > release > Environment secrets):
+# Optional secrets (Settings > Environments > release > Environment secrets):
 #   VSCE_PAT  Azure DevOps PAT, Organization "All accessible organizations", scope Marketplace > Manage.
 #             Global PATs stop working on 2026-12-01: switch to the Entra ID block below before that.
 #   OVSX_PAT  Open VSX access token (https://open-vsx.org/user-settings/tokens).
@@ -43,9 +44,20 @@ jobs:
       - name: Package
         run: npx --yes @vscode/vsce@3.9.2 package --no-dependencies --out serena-theme.vsix
 
+      # Secrets cannot be read in `if:`, so this step only reports which ones exist.
+      - name: Check which stores have credentials
+        id: creds
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+        run: |
+          echo "vsce=$([ -n "$VSCE_PAT" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "ovsx=$([ -n "$OVSX_PAT" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
       # Option A (works until 2026-12-01): PAT stored as a secret.
       - name: Publish to Visual Studio Marketplace (PAT)
-        run: npx --yes @vscode/vsce@3.9.2 publish --packagePath serena-theme.vsix
+        if: steps.creds.outputs.vsce == 'true'
+        run: npx --yes @vscode/vsce@3.9.2 publish --skip-duplicate --packagePath serena-theme.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
@@ -64,7 +76,8 @@ jobs:
       #   run: npx --yes @vscode/vsce@3.9.2 publish --azure-credential --packagePath serena-theme.vsix
 
       - name: Publish to Open VSX
-        run: npx --yes ovsx@1.2.0 publish serena-theme.vsix
+        if: steps.creds.outputs.ovsx == 'true'
+        run: npx --yes ovsx@1.2.0 publish --skip-duplicate serena-theme.vsix
         env:
           OVSX_PAT: ${{ secrets.OVSX_PAT }}
 
