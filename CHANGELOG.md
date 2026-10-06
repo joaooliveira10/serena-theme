@@ -1,6 +1,6 @@
 # Changelog
 
-## Não lançado
+## 1.0.2
 
 - Página da loja: link para o Open VSX, onde a extensão agora também está publicada.
 
