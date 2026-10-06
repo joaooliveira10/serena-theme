@@ -94,26 +94,55 @@ Use `minor` para novidades e `major` para mudanças grandes. No upload manual: m
 
 ## 2. Open VSX (VSCodium, Cursor, Windsurf e outros editores)
 
+Seção conferida em 06/10/2026. A extensão está em https://open-vsx.org/extension/joaoangello/serena-theme
+
+### Preparar a conta (uma vez só, já feito)
+
 1. Crie uma conta em https://accounts.eclipse.org e preencha **GitHub Username** com `joaooliveira10`.
 2. Entre em https://open-vsx.org com o GitHub → avatar → **Settings** → **Profile** → **Log in with Eclipse** e assine o **Publisher Agreement**.
-3. **Settings** → **Access Tokens** → **Generate New Token**. Copie na hora: ele só aparece uma vez.
-4. Crie o namespace (igual ao publisher) e publique o **mesmo** `.vsix` do Marketplace:
+3. Em **Settings**, clique no **+** ao lado de **Namespaces** e crie `joaoangello` (igual ao `publisher` do `package.json`, com as mesmas maiúsculas e minúsculas).
+
+### Publicar uma versão pelo site (sem token)
+
+1. Abra https://open-vsx.org/publish (ou **Settings** → **Extensions** → **Publish extension**).
+2. Envie o **mesmo** `.vsix` do Marketplace.
+3. A versão fica em "Under review" por um ou dois minutos, enquanto passa pela verificação automática, e depois aparece como "Public".
+
+### Posse do namespace
+
+Quem cria um namespace vira só colaborador dele. Enquanto ninguém for dono, a página da extensão mostra um aviso de "publisher não verificado", e não dá para usar a publicação automática sem token.
+
+Para pedir a posse, abra **Settings** → **Namespaces** → `joaoangello` → **Claim Ownership**. Isso cria uma issue pública em https://github.com/EclipseFdn/open-vsx.org, que a equipe da Eclipse analisa à mão (pode levar dias). No formulário, marque a **Option 1** (o namespace também é um publisher no Marketplace, com uma extensão cujo repositório pertence à sua conta do GitHub).
+
+### Publicar pelo GitHub sem token (Trusted Publishing)
+
+Depois que a posse for aprovada:
+
+1. No Open VSX, **Settings** → **Trusted Publishers** → namespace `joaoangello` → **GitHub Actions**, com:
+   - Organization or User name: `joaooliveira10`
+   - Repository name: `serena-theme`
+   - Workflow filename: `release.yml`
+   - Environment name: `release`
+2. No GitHub, **Settings** → **Environments** → `release` → **Environment variables**, crie `OVSX_TRUSTED_PUBLISHING` com o valor `true`.
+
+A partir daí, cada tag enviada publica no Open VSX sozinha (veja a seção 3). Não há segredo guardado: o GitHub prova ao Open VSX que é esse workflow, e recebe um token que dura minutos e só serve para esta extensão.
+
+### Publicar pela linha de comando (com token)
+
+Só se preferir: **Settings** → **Access Tokens** → **Generate New Token** (copie na hora: ele só aparece uma vez) e:
 
 ```bash
-npx ovsx create-namespace joaoangello -p SEU_TOKEN
+npx ovsx publish serena-theme-1.0.1.vsix -p SEU_TOKEN
 ```
-
-```bash
-npx ovsx publish serena-theme-1.0.0.vsix -p SEU_TOKEN
-```
-
-5. Peça a posse do namespace em https://github.com/EclipseFdn/open-vsx.org/issues/new/choose (**Claim namespace ownership**). Até ser aprovado, a página mostra "unverified".
 
 ## 3. Automático pelo GitHub (opcional)
 
-O arquivo `.github/workflows/release.yml` roda quando você envia uma tag. Ele sempre cria uma Release no GitHub com o `.vsix` anexado, e publica em cada loja **só se o segredo dela existir**. Sem segredos, você continua enviando o `.vsix` à loja pelo site.
+O arquivo `.github/workflows/release.yml` roda quando você envia uma tag. Ele sempre cria uma Release no GitHub com o `.vsix` anexado, e publica em cada loja **só se ela estiver configurada**. Sem configuração, você continua enviando o `.vsix` à loja pelo site.
 
-1. Opcional, para publicar automaticamente: no GitHub, **Settings** → **Environments** → `release`, adicione os segredos `VSCE_PAT` (token do Azure DevOps) e/ou `OVSX_PAT` (token do Open VSX) e exija a sua aprovação em **Required reviewers**.
+1. Opcional, para publicar automaticamente: no GitHub, **Settings** → **Environments** → `release`:
+   - Open VSX: a variável `OVSX_TRUSTED_PUBLISHING` (seção 2, sem token) ou o segredo `OVSX_PAT` (token do Open VSX).
+   - Marketplace: o segredo `VSCE_PAT` (token do Azure DevOps).
+   - Exija a sua aprovação em **Required reviewers**.
 2. Crie e envie a tag com a mesma versão do `package.json` (troque pelo número da versão):
 
 ```bash
@@ -124,4 +153,4 @@ git tag v1.0.1
 git push origin v1.0.1
 ```
 
-O workflow confere a versão, regenera os temas, empacota, publica nas lojas que tiverem segredo e anexa o `.vsix` numa Release do GitHub.
+O workflow confere a versão, regenera os temas, empacota, publica nas lojas configuradas e anexa o `.vsix` numa Release do GitHub.

@@ -2,13 +2,19 @@
 #   1. regenerates themes/ and icons/ and fails if the committed files are stale
 #   2. packages ONE .vsix
 #   3. publishes that same .vsix to the Visual Studio Marketplace and to Open VSX,
-#      each one only if its secret exists (without secrets, upload the .vsix by hand)
+#      each one only if it is configured below (otherwise, upload the .vsix by hand)
 #   4. attaches the .vsix to a GitHub release
+#
+# Open VSX without a stored secret (Settings > Environments > release > Environment variables):
+#   OVSX_TRUSTED_PUBLISHING  set to "true" once this workflow is registered as a trusted publisher at
+#                            https://open-vsx.org/user-settings/trusted-publishers (owner joaooliveira10,
+#                            repository serena-theme, workflow release.yml, environment release).
 #
 # Optional secrets (Settings > Environments > release > Environment secrets):
 #   VSCE_PAT  Azure DevOps PAT, Organization "All accessible organizations", scope Marketplace > Manage.
 #             Global PATs stop working on 2026-12-01: switch to the Entra ID block below before that.
-#   OVSX_PAT  Open VSX access token (https://open-vsx.org/user-settings/tokens).
+#   OVSX_PAT  Open VSX access token (https://open-vsx.org/user-settings/tokens). Only used while
+#             OVSX_TRUSTED_PUBLISHING is not "true".
 name: Release
 
 on:
@@ -18,7 +24,7 @@ on:
 # Actions are pinned to full commit SHAs (a tag can be moved, a SHA cannot). Dependabot keeps them up to date.
 permissions:
   contents: write # create the GitHub release
-  # id-token: write # add back only when switching to the Entra ID option below
+  id-token: write # short-lived OIDC token for Open VSX trusted publishing (and the Entra ID option below)
 
 jobs:
   release:
@@ -75,8 +81,15 @@ jobs:
       # - name: Publish to Visual Studio Marketplace (Entra ID)
       #   run: npx --yes @vscode/vsce@3.9.2 publish --azure-credential --packagePath serena-theme.vsix
 
-      - name: Publish to Open VSX
-        if: steps.creds.outputs.ovsx == 'true'
+      # Open VSX, option A (no stored secret): trusted publishing. The job proves its identity with an
+      # OIDC token and Open VSX answers with a token that lasts minutes and can only publish this extension.
+      - name: Publish to Open VSX (trusted publishing)
+        if: vars.OVSX_TRUSTED_PUBLISHING == 'true'
+        run: npx --yes ovsx@1.2.0 publish --trusted-publishing --skip-duplicate serena-theme.vsix
+
+      # Open VSX, option B: access token stored as a secret.
+      - name: Publish to Open VSX (access token)
+        if: vars.OVSX_TRUSTED_PUBLISHING != 'true' && steps.creds.outputs.ovsx == 'true'
         run: npx --yes ovsx@1.2.0 publish --skip-duplicate serena-theme.vsix
         env:
           OVSX_PAT: ${{ secrets.OVSX_PAT }}
