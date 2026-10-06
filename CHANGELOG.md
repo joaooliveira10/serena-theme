@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Página da loja: removidos os selos que não funcionavam e a menção ao Open VSX, onde a extensão ainda não está publicada.
+
 ## 1.0.0
 
 Primeira versão pública.

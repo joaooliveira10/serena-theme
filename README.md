@@ -2,10 +2,6 @@
 
 Calm, harmonious color themes for VS Code — **Serena Dark**, **Serena Dark Vivid**, **Serena Light**, **Serena Light Vivid**, **Serena High Contrast** and **Serena High Contrast Light** — plus **Serena Icons**, a matching file and folder icon theme in two editions. Each color has the same meaning in every variant, so you can switch between them without relearning anything.
 
-[![Visual Studio Marketplace](https://vsmarketplacebadges.dev/version-short/joaoangello.serena-theme.png)](https://marketplace.visualstudio.com/items?itemName=joaoangello.serena-theme)
-[![Installs](https://vsmarketplacebadges.dev/installs-short/joaoangello.serena-theme.png)](https://marketplace.visualstudio.com/items?itemName=joaoangello.serena-theme)
-[![Open VSX](https://img.shields.io/open-vsx/v/joaoangello/serena-theme)](https://open-vsx.org/extension/joaoangello/serena-theme)
-
 ![Serena Dark](images/screenshots/serena-dark.png)
 
 ## Color themes
@@ -48,7 +44,7 @@ Icons for **284 file types and 101 folders**, with separate versions for dark, l
 2. Color theme: `Ctrl+K Ctrl+T` (**Preferences: Color Theme**) and pick a Serena theme.
 3. Icons: **Preferences: File Icon Theme** in the Command Palette, then **Serena Icons** or **Serena Icons Minimal**.
 
-Also available on [Open VSX](https://open-vsx.org/extension/joaoangello/serena-theme) for VSCodium, Cursor, Windsurf and other editors that use it, and works in [vscode.dev](https://vscode.dev).
+It also works in [vscode.dev](https://vscode.dev).
 
 ## One meaning per color
 
