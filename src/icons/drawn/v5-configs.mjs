@@ -2,16 +2,15 @@
 // v5 config split (style.md §6): config files are never chips, never package boxes, never lockfile boxes;
 // lockfiles always get the lockfile box. These concepts take the config / manifest / lock / data keys
 // that used to sit in a source chip (svelte, astro, vue, godot, laravel, haskell, r …), a manifest box
-// (swift-package, nuget, maven, cocoapods, helm) or a lockfile box (yarn, pnpm, bun); see mapping.json
-// "v5" and v5/config-split.md.
+// (swift-package, nuget, maven, cocoapods, helm) or a lockfile box (yarn, pnpm, bun).
 // Families: config -> sliders (3 tracks at .5 + 3 knobs) in the old owner's token, with a knob layout
 // no other same-colour config uses (numbers = top-left x of the knob on each track); lockfile -> box
 // notched + muted lock mark; manifest -> box; scene/data -> letter + lines; artisan -> framed console.
 // Same-colour boxes/lockboxes differ by their interior detail (slot, two slots, stud, stairs, flap,
 // tag, arrow, pods). Original artwork only, no brand marks.
-// Inner SVG markup for viewBox "0 0 16 16" with {{token}} placeholders; generated from
-// work/v5-config-split/art/batch.mjs (glyphs.mjs helpers) by gen.mjs and inlined as plain strings,
-// so this module has NO imports. Lint clean with render.mjs --strict.
+// Inner SVG markup for viewBox "0 0 16 16" with {{token}} placeholders.
+// Hand-maintained: written with the helpers of system/glyphs.mjs and inlined as
+// plain strings, so this module has NO imports.
 export const icons = {
   // *.psd1, *.pssc, *.psrc, *.ps1xml: CONFIG sliders in blue, knobs centre/right/centre (6,9,6).
   "powershell-config":

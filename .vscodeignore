@@ -1,5 +1,10 @@
 # Whitelist: package only what VS Code needs at runtime.
-# Everything else (src/, build.mjs, exemplos/, .github/, screenshots, CONTRIBUTING.md...) stays out.
+# Everything else (src/, build.mjs, scripts/, exemplos/, .github/, screenshots, CONTRIBUTING.md...) stays out.
+# The lines match only the names the build generates. A stray file with such a name (themes/serena-*-color-theme.json,
+# or an .svg directly inside icons/dark, light, hc or icons/logos/<mode>) would still be packaged: "node build.mjs"
+# deletes it and "node scripts/check.mjs" fails on it, so run both before packaging by hand.
+# A new variant whose id does not start with "serena-", or a new icon theme, needs its own line
+# (node scripts/check.mjs says so).
 **
 !package.json
 !README.md
@@ -7,8 +12,9 @@
 !LICENSE
 !THIRD_PARTY_NOTICES.md
 !images/icon.png
-!themes/*-color-theme.json
-!icons/*.json
+!themes/serena-*-color-theme.json
+!icons/serena-icons.json
+!icons/serena-icons-minimal.json
 !icons/dark/*.svg
 !icons/light/*.svg
 !icons/logos/dark/*.svg

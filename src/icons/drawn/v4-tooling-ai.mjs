@@ -3,8 +3,8 @@
 // docs generators, design/3D/ML assets and mobile/game engines. Original artwork only: every
 // brand is evoked with its palette token + a generic functional symbol or a Serena-font monogram,
 // never with its logo or mascot. Inner SVG markup for viewBox "0 0 16 16" with {{token}}
-// placeholders; generated from work/v4-tooling-ai/batch.mjs (glyphs.mjs helpers) and inlined as
-// plain strings so this module has NO imports. All ids lint clean with render.mjs --strict.
+// placeholders. Hand-maintained: written with the helpers of system/glyphs.mjs and inlined as
+// plain strings, so this module has NO imports.
 export const icons = {
   // ── AI assistants (variants of `ai`: lavender sparkle) ─────────────────────────────────────
   // Claude memory/settings: speech bubble with a 4-point sparkle (rust) — not the starburst mark

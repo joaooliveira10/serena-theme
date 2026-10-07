@@ -1,4 +1,6 @@
 # Keeps the GitHub Actions used by the workflows up to date (including the pinned commit SHAs).
+# It does not see the vsce and ovsx versions, which are pinned inside "run:" commands: PUBLICAR.md (section 1)
+# says how to update those by hand, and scripts/check.mjs fails when the places disagree.
 version: 2
 updates:
   - package-ecosystem: github-actions

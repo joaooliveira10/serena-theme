@@ -1,8 +1,8 @@
 // Serena Icons — batch "v4-web-frameworks" (45 FILE icons, MINIMAL edition).
 // Original artwork only: palette token + monogram or a functional symbol, no brand marks.
-// Inner SVG markup for viewBox "0 0 16 16" with {{token}} placeholders; generated from
-// work/v4-web-frameworks/batch.mjs (glyphs.mjs helpers) by gen.mjs and inlined as plain
-// strings, so this module has NO imports. Lint clean with render.mjs --strict.
+// Inner SVG markup for viewBox "0 0 16 16" with {{token}} placeholders.
+// Hand-maintained: written with the helpers of system/glyphs.mjs and inlined as
+// plain strings, so this module has NO imports.
 // Families (style.md §4): component/template languages + TS/Angular file roles -> chips;
 // framework/runtime configs -> sliders in the owner's token (mirrored knob layout;
 // nest has its own right/far-left/far-right layout so it never matches angular);

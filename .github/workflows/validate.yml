@@ -1,7 +1,10 @@
-# Checks every push and pull request:
-#   1. themes/, icons/ and the README "no italics" block were regenerated from src/ (node build.mjs)
-#   2. the extension still packages
-#   3. the release tools (vsce, ovsx) still install under the same npm settings release.yml uses
+# Checks every push to main and every pull request:
+#   1. themes/, icons/, package.json and the README "no italics" block were regenerated from src/ (node build.mjs)
+#      and every generated file is committed, including new ones
+#   2. what the build does not check holds (node scripts/check.mjs): contrast of the syntax colors, roles,
+#      icon theme files, safe SVG, numbers in the README, theme lists
+#   3. the extension still packages, and the package holds only the files VS Code loads
+#   4. the release tools (vsce, ovsx) still install under the same npm settings release.yml uses
 name: Validate
 
 on:
@@ -15,6 +18,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     # Same npm settings as release.yml, so a dependency that cannot be resolved shows up here first.
     env:
       NPM_CONFIG_IGNORE_SCRIPTS: "true"
@@ -28,13 +32,43 @@ jobs:
         with:
           node-version: 24
 
+      # "git status" also reports files the build created or deleted; "git diff" only looks at tracked files.
       - name: Generated files must be up to date
         run: |
           node build.mjs
-          git diff --exit-code || (echo "::error::Run 'node build.mjs' and commit the generated files." && exit 1)
+          changes="$(git status --porcelain)"
+          if [ -n "$changes" ]; then
+            echo "$changes"
+            echo "::error::Run 'node build.mjs' and commit every generated file, including new ones."
+            exit 1
+          fi
 
+      - name: Checks the build does not make (contrast, roles, icons, README numbers)
+        run: node scripts/check.mjs
+
+      # Same commands as release.yml. SOURCE_DATE_EPOCH makes vsce stamp the files with the commit time
+      # instead of the current time, so on these runners the same commit gives the same .vsix (a build on
+      # Windows or in another time zone has another hash).
       - name: Package
-        run: npx --yes @vscode/vsce@3.9.2 package --no-dependencies --out serena-theme.vsix
+        run: |
+          SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)"
+          export SOURCE_DATE_EPOCH
+          npx --yes @vscode/vsce@3.9.2 package --no-dependencies --out serena-theme.vsix
+          sha256sum serena-theme.vsix
+
+      # .vscodeignore is a whitelist; this looks at the result. A new kind of file that should ship
+      # needs a line in .vscodeignore and in the list below.
+      - name: The package holds only what VS Code loads
+        run: |
+          allowed='^(\[Content_Types\]\.xml|extension\.vsixmanifest|extension/(package\.json|readme\.md|changelog\.md|LICENSE\.txt|THIRD_PARTY_NOTICES\.md|images/icon\.png|themes/serena-[a-z0-9-]+-color-theme\.json|icons/serena-icons(-minimal)?\.json|icons/(logos/)?(dark|light|hc)/[a-z0-9][a-z0-9_-]*\.svg))$'
+          files="$(unzip -Z1 serena-theme.vsix)"
+          extra="$(printf '%s\n' "$files" | grep -vE "$allowed" || true)"
+          if [ -n "$extra" ]; then
+            printf '%s\n' "$extra"
+            echo "::error::The package has files that VS Code does not load (listed above)."
+            exit 1
+          fi
+          echo "$(printf '%s\n' "$files" | wc -l) files in the package, all of them expected."
 
       # Installs the pinned Open VSX CLI and runs it without publishing anything.
       - name: Open VSX CLI installs

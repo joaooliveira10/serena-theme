@@ -1,6 +1,7 @@
 name: Icon request or icon problem
 description: A file or folder has no icon, the wrong icon, or an icon that is hard to read.
-labels: ["icons"]
+# GitHub only applies the labels that exist in the repository: "icons" starts to apply once it is created.
+labels: ["enhancement", "icons"]
 body:
   - type: dropdown
     id: edition
@@ -43,7 +44,7 @@ body:
     attributes:
       label: Logo (for Serena Icons)
       description: |
-        Serena Icons only uses a brand's logo when its license and brand guidelines allow it to be recolored and simplified.
+        Serena Icons only redraws a brand's logo when its license allows modification and no published rule of the owner forbids recoloring or simplifying it, or requires permission.
         If you know where the official logo and its usage rules are published, add the links here. Otherwise an original icon will be drawn.
   - type: textarea
     id: screenshot

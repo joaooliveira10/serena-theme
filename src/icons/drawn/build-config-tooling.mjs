@@ -1,8 +1,8 @@
 // Serena Icons — batch "build-config-tooling" (FILE icons).
 // Manifests (package box), lockfiles (box + lock mark), tool/language configs (sliders in
 // the owner's token) and tool symbols. Inner SVG markup for viewBox "0 0 16 16" with
-// {{token}} placeholders; generated from work/build-config-tooling/batch.mjs (glyphs.mjs
-// helpers) and inlined so the module has no imports. All ids lint clean with render.mjs.
+// {{token}} placeholders. Hand-maintained: written with the helpers of system/glyphs.mjs and inlined, so the
+// module has no imports. Edit the strings, or import the helpers as folders.mjs does.
 export const icons = {
   // .csproj/.fsproj/.vbproj: dependency manifest -> package box (purple, .NET)
   "dotnet-project":

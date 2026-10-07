@@ -29,7 +29,7 @@ export const tokenColors = (r) => [
   },
   {
     name: "Strings",
-    scope: ["string", "string.quoted", "string.template", "punctuation.definition.string"],
+    scope: ["string", "string.quoted", "string.template", "punctuation.definition.string", "property.value.dotenv"],
     settings: { foreground: r.string },
   },
   {
@@ -51,6 +51,16 @@ export const tokenColors = (r) => [
     name: "Regex: delimitadores de grupos e conjuntos",
     scope: ["constant.other.set.regexp", "punctuation.definition.character-class.regexp", "punctuation.definition.group.regexp", "support.other.parenthesis.regexp"],
     settings: { foreground: r.punct },
+  },
+  {
+    name: "Python regex: referências \\1 e (?P=nome) como no JS (a gramática as marca como tag)",
+    scope: ["entity.name.tag.backreference.regexp", "entity.name.tag.named.backreference.regexp"],
+    settings: { foreground: r.keyword },
+  },
+  {
+    name: "Python regex: nome do grupo (?P<nome>) como no JS (a gramática o marca como tag)",
+    scope: ["entity.name.tag.named.group.regexp"],
+    settings: { foreground: r.fg },
   },
   {
     name: "Interpolação em template strings e f-strings",
@@ -94,12 +104,12 @@ export const tokenColors = (r) => [
   },
   {
     name: "this / self / cls",
-    scope: ["variable.language.this", "variable.language.self", "variable.language.super", "variable.language.special.self", "variable.language.special.cls", "variable.parameter.function.language.special.self", "variable.parameter.function.language.special.cls"],
+    scope: ["variable.language.this", "variable.language.self", "variable.language.super", "variable.language.special.self", "variable.language.special.cls", "variable.parameter.function.language.special.self", "variable.parameter.function.language.special.cls", "variable.language.java"],
     settings: { foreground: r.special, fontStyle: "italic" },
   },
   {
     name: "Propriedades e chaves",
-    scope: ["variable.other.property", "variable.other.object.property", "variable.object.property", "support.variable.property", "meta.object-literal.key", "meta.object-literal.key string.quoted", "meta.attribute.python", "entity.name.tag.yaml", "support.type.property-name", "variable.other.constant.property", "keyword.other.definition.ini"],
+    scope: ["variable.other.property", "variable.other.object.property", "variable.object.property", "support.variable.property", "meta.object-literal.key", "meta.object-literal.key string.quoted", "meta.attribute.python", "entity.name.tag.yaml", "support.type.property-name", "variable.other.constant.property", "keyword.other.definition.ini", "variable.key.dotenv", "variable.other.env", "variable.interpolation.dotenv"],
     settings: { foreground: r.property },
   },
   {
@@ -204,21 +214,51 @@ export const tokenColors = (r) => [
   },
   {
     name: "Diff",
-    scope: ["markup.inserted"],
+    scope: ["markup.inserted", "markup.inserted punctuation.definition.inserted"],
     settings: { foreground: r.string },
   },
   {
-    scope: ["markup.deleted"],
+    scope: ["markup.deleted", "markup.deleted punctuation.definition.deleted"],
     settings: { foreground: r.special },
   },
   {
-    scope: ["markup.changed"],
+    scope: ["markup.changed", "markup.changed punctuation.definition.changed"],
     settings: { foreground: r.func },
+  },
+  {
+    name: "Diff: cabeçalhos (diff --git, --- a/arquivo, +++ b/arquivo)",
+    scope: ["meta.diff.header"],
+    settings: { foreground: r.keyword },
+  },
+  {
+    name: "Diff: intervalo do hunk (@@ -12,9 +12,9 @@)",
+    scope: ["meta.diff.range"],
+    settings: { foreground: r.property },
+  },
+  {
+    name: "Diff: linha index (index 3f2a9c1..b7d4e02) discreta, na cor de comentário",
+    scope: ["meta.diff.index"],
+    settings: { foreground: r.comment },
+  },
+  {
+    name: "Log: erros e exceções na cor de erro",
+    scope: ["log.error", "log.exception", "log.exceptiontype"],
+    settings: { foreground: r.special },
+  },
+  {
+    name: "Log: avisos na cor de aviso",
+    scope: ["log.warning"],
+    settings: { foreground: r.type },
   },
   {
     name: "Inválido",
     scope: ["invalid", "invalid.illegal"],
     settings: { foreground: r.special, fontStyle: "underline" },
+  },
+  {
+    name: "Git commit: assunto entre 51 e 72 colunas é só um aviso (acima de 72 continua como erro)",
+    scope: ["invalid.deprecated.line-too-long.git-commit"],
+    settings: { foreground: r.type, fontStyle: "" },
   },
 
   // ───── C# e Java ─────
@@ -248,7 +288,7 @@ export const tokenColors = (r) => [
     settings: { foreground: r.keyword },
   },
   {
-    name: "C#: operadores lógicos, de comparação e ?? (o Roslyn envia todos como 'operator')",
+    name: "C#: operadores lógicos, de comparação e ?? (o Roslyn envia 'operator' ou 'operatorOverloaded'; os dois ficam como pontuação)",
     scope: ["keyword.operator.logical.cs", "keyword.operator.comparison.cs", "keyword.operator.relational.cs", "keyword.operator.null-coalescing.cs"],
     settings: { foreground: r.punct },
   },
@@ -279,7 +319,7 @@ export const tokenColors = (r) => [
   },
   {
     name: "C#: XML doc (///): atributos, aspas, valores e delimitadores ficam como comentário",
-    scope: ["comment.block.documentation.cs entity.other.attribute-name", "comment.block.documentation.cs punctuation.definition.tag.cs", "comment.block.documentation.cs punctuation.separator.equals.cs", "comment.block.documentation.cs string.quoted.double.cs", "comment.block.documentation.cs punctuation.definition.string"],
+    scope: ["comment.block.documentation.cs entity.other.attribute-name", "comment.block.documentation.cs punctuation.definition.tag.cs", "comment.block.documentation.cs punctuation.separator.equals.cs", "comment.block.documentation.cs string.quoted.double.cs", "comment.block.documentation.cs punctuation.definition.string", "comment.block.documentation.cs constant.character.entity", "comment.block.documentation.cs constant.character.entity punctuation.definition.constant"],
     settings: { foreground: r.comment },
   },
   {
@@ -412,8 +452,8 @@ export const tokenColors = (r) => [
     settings: { foreground: r.special, fontStyle: "italic" },
   },
   {
-    name: "JSX/TSX: entidades HTML (&nbsp; &amp;) como escapes",
-    scope: ["constant.character.entity.js", "constant.character.entity.tsx", "constant.character.entity.js punctuation.definition.entity", "constant.character.entity.tsx punctuation.definition.entity"],
+    name: "Entidades HTML/XML (&nbsp; &amp;) como escapes",
+    scope: ["constant.character.entity", "constant.character.entity punctuation.definition.entity", "constant.character.entity punctuation.definition.constant"],
     settings: { foreground: r.property },
   },
   {
@@ -423,7 +463,7 @@ export const tokenColors = (r) => [
   },
   {
     name: "Python 3.12+: declaração de parâmetros de tipo (class C[T], def f[T], type X[T])",
-    scope: ["variable.parameter.type.typevar"],
+    scope: ["variable.parameter.type.typevar", "variable.parameter.type.paramspec", "variable.parameter.type.typevartuple"],
     settings: { foreground: r.type, fontStyle: "" },
   },
   {
@@ -592,6 +632,11 @@ export const tokenColors = (r) => [
     name: "Swift: self / super / Self",
     scope: ["variable.language.swift"],
     settings: { foreground: r.special, fontStyle: "italic" },
+  },
+  {
+    name: "Swift: parâmetros genéricos e associatedtype na declaração (os usos já são tipo)",
+    scope: ["variable.language.generic-parameter.swift", "variable.language.associatedtype.swift"],
+    settings: { foreground: r.type },
   },
   {
     name: "Swift: parâmetros implícitos de closure ($0, $1)",
@@ -1186,6 +1231,9 @@ export const semanticTokenColors = (r) => ({
   "interface": r.type,
   "namespace": r.type,
   "function": r.func,
+  // Parâmetro cujo tipo é uma função (resolve, reject, next, callback): tsserver/tsgo enviam function.declaration
+  // sobre o escopo TextMate de parâmetro; sem isto a declaração herdaria o itálico e pareceria um decorator.
+  "function.declaration": { foreground: r.func, italic: false },
   "method": r.func,
   "variable:python": r.fg,
   "variable.readonly:python": r.constant,
@@ -1201,6 +1249,9 @@ export const semanticTokenColors = (r) => ({
   "variable.decorator:python": { foreground: r.func, italic: true },
 
   // C# (Roslyn) e Java (redhat.java)
+  // operatorOverloaded: operadores definidos pelo usuário (Guid ==, DateTime +, records). Sem regra, a extensão C#
+  // os pinta como método; aqui ficam como os demais operadores do C# (mesma cor do TextMate, sem troca ao carregar).
+  "operatorOverloaded": r.punct,
   "delegate": r.type,
   "constant": r.constant,
   "event": r.property,

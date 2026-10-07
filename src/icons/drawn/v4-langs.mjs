@@ -1,6 +1,6 @@
-// Serena Icons — batch "v4-langs" (MINIMAL edition, 43 file icons). Generated from
-// work/v4-langs/src.mjs (helpers from system/glyphs.mjs) and inlined as plain strings, so this
-// module has no imports. Inner SVG markup for viewBox "0 0 16 16" with {{token}} placeholders.
+// Serena Icons — batch "v4-langs" (MINIMAL edition, 43 file icons).
+// Hand-maintained: written with the helpers of system/glyphs.mjs and inlined as
+// plain strings, so this module has no imports. Inner SVG markup for viewBox "0 0 16 16" with {{token}} placeholders.
 // Original artwork only (no official logos). Families (style.md §4–6):
 //   source      → chip (tile .2 + Serena stroke-font monogram): RS C C++ CM PHP BL RB SW OC DA
 //                 LUA R JL SC EX HS F# VB ZIG PL GR ASM MAT NIX; shader = chip tile + lit triangle
@@ -13,8 +13,8 @@
 //   configs     → sliders in the owner's token; the knob arrangement differs from any existing
 //                 config of the same or a neighbouring token (c-config vs tsconfig, php-config vs
 //                 dotnet-config/appsettings, flutter vs style-config, ruby-config vs rust-config)
-// Token change vs mapping.json: groovy is teal (mapping: cyan) — a cyan "GR" chip reads as Go's
-// cyan "GO" at 1x; teal also pairs Groovy with Gradle. First {{token}} = token, second = accent.
+// groovy is teal, not cyan: a cyan "GR" chip reads as Go's cyan "GO" at 1x, and teal also pairs
+// Groovy with Gradle. First {{token}} = main token, second = accent.
 export const icons = {
   "rust": "<path d=\"M3 2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z\" fill=\"{{rust}}\" fill-opacity=\".2\"/><path d=\"M3.5 10.5V4.5H6.5L7.5 5.5V6.5L6.5 7.5H3.5M5.5 7.5L7.5 9.5V10.5M13.5 5.5L12.5 4.5H10.5L9.5 5.5V6.5L10.5 7.5H12.5L13.5 8.5V9.5L12.5 10.5H10.5L9.5 9.5\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"{{rust}}\"/>",
   "cargo": "<path d=\"M2.5 5.5h11v8h-11v-8zM4.5 2.5h7l2 3M4.5 2.5l-2 3M2.5 9.5h11\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"{{rust}}\"/>",

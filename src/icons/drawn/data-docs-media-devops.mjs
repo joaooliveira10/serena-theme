@@ -1,11 +1,10 @@
 // Serena Icons — batch "data-docs-media-devops" (FILE icons).
 // Data/serialization (syntax symbol or letter + lines), documents (prose lines + glyph), media
 // (framed content), archives/security, dev tools and DevOps (original functional symbols —
-// no vendor logos). Inner SVG markup for viewBox "0 0 16 16" with {{token}} placeholders;
-// generated from work/data-docs-media-devops/batch.mjs (glyphs.mjs helpers) by gen.mjs and
-// inlined as plain strings so this module has NO imports (same convention as
-// languages-source.mjs and build-config-tooling.mjs). Exemplar ids (file, json, yaml,
-// markdown, image) are byte-identical to exemplars.mjs. All ids lint clean with render.mjs.
+// no vendor logos). Inner SVG markup for viewBox "0 0 16 16" with {{token}} placeholders.
+// Hand-maintained: written with the helpers of system/glyphs.mjs and inlined as
+// plain strings, so this module has NO imports (same convention as languages-source.mjs and
+// build-config-tooling.mjs). Edit the strings, or import the helpers as folders.mjs does.
 export const icons = {
   // ── default ───────────────────────────────────────────────────────────────────────────────────
   // default file: plain folded page (muted) — exemplar

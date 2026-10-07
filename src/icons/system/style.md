@@ -1,22 +1,29 @@
 # Serena Icons — style guide for drawers
 
 Serena Icons is the file-icon theme for the Serena VS Code themes (Serena Dark, Serena Dark Vivid,
-Serena Light). It is **calm, pastel and pixel-crisp**: 1px lines on the pixel grid, soft round
-caps, one colour family per icon, and the same markup rendered in a dark and a light palette.
+Serena Light, Serena Light Vivid, Serena High Contrast, Serena High Contrast Light). It is **calm,
+pastel and pixel-crisp**: 1px lines on the pixel grid, soft round caps, one colour family per icon,
+and the same markup rendered in a dark, a light and a high-contrast palette.
 
-Look at `exemplars.png` before you draw anything. Every icon you make must look like it belongs
-in that sheet.
+Look at the existing icons before you draw anything: the generated files in `icons/dark/`, or the
+explorer of the test window (F5, see `CONTRIBUTING.md`). Every icon you make must look like it
+belongs there.
 
-## Files in `icons/system/`
+## Files in `src/icons/system/`
 
 | file | what it is |
 |---|---|
-| `tokens.json` | the 19 colour tokens, `dark` and `light` values |
+| `tokens.json` | the 19 colour tokens: `dark`, `light` and `hc` (high contrast) values |
 | `glyphs.mjs` | stroke font (monograms) + building blocks: `chip`, `page`, `lines`, `dot`, `mark`, `stroke`, `fill`, `rrect` … |
 | `folder.mjs` | folder shapes, badge slot, ready-made `BADGES` |
-| `render.mjs` | contact sheet + linter: `node render.mjs <module.mjs> <out.png> [--ids a,b] [--context] [--compare]` |
-| `exemplars.mjs` / `exemplars.png` | the reference set (same format you deliver) |
 | `style.md` | this file |
+
+The drawings are in `src/icons/drawn/*.mjs` (this guide) and `src/icons/logos/*.mjs`
+(`logos/logo-style.md`). `src/icons/mapping.json` says which files and folders use each drawing
+(`src/icons/spec.md`), and `src/icons/build-icons.mjs` writes the SVG files and the two theme JSON
+files into `icons/`. `node build.mjs` refuses invalid input, `node scripts/check.mjs` checks what was
+generated (mapping keys, SVG content, token contrast, the two icon theme files), and F5 is the
+preview.
 
 ---
 
@@ -27,16 +34,19 @@ in that sheet.
 3. `stroke-linecap="round" stroke-linejoin="round"` and `fill="none"` on every stroke (the
    `stroke()` helper does this for you).
 4. Colours only as `{{token}}` placeholders from the vocabulary. **Max 2 tokens per icon.**
-5. Opacity values: only `.2` (chip tiles) and `.5` (secondary parts).
-6. No `<text>`, no transforms, no masks/clipPaths/filters/gradients/`<use>`/ids/`url()`.
+5. Opacity values: only `.2` (chip tiles) and `.5` (secondary parts), written exactly like that.
+6. Only `<path>` elements. No `<text>`, no transforms, no masks/clipPaths/filters/gradients/`<use>`/
+   ids/`url()`/`style`/links. The build refuses anything else (§13).
 7. Close stroked shapes with an explicit final segment before `Z` (§7).
 8. Pick the family (§4): **source → chip**, data → syntax symbol or letter + lines,
    docs → prose lines, config → sliders, media → framed content.
 9. Variants: role → corner mark, syntax flavour → 3-letter chip, declarations → `sand` letters,
    generated → `muted` (§5).
 10. Original artwork only. Never draw a brand logo (§12).
-11. `node ../../system/render.mjs mine.mjs mine.png --context --compare` must print **lint clean**.
-    Look at the PNGs: 1x columns first, then 2x, then the 4x zoom.
+11. `node build.mjs` (repository root) must end without "Problemas encontrados", and
+    `node scripts/check.mjs` must end with `ok`. Then look at the
+    icons in the test window (F5): at 100% zoom first, on a dark, a light and a high contrast
+    Serena theme, then at 125–200%.
 
 ---
 
@@ -70,7 +80,7 @@ in that sheet.
 ## 2. Line weight, caps, joins
 
 * **1px is the only line weight.** For mass, use fills (`dot()`, 2px-thick filled bars, the chip
-  tint), not heavier strokes. `stroke-width="2"` is legal for the linter but is not used in the set.
+  tint), not heavier strokes. `stroke-width="2"` is accepted by the build but is not used in the set.
   The stroke font's `weight: 2` looked blotchy in testing; do not use it.
 * Caps and joins are **round**: soft at 2x, still crisp at 1x. The `stroke()` helper sets
   `fill="none" stroke-linecap="round" stroke-linejoin="round"`.
@@ -80,8 +90,8 @@ in that sheet.
 ## 3. Colour
 
 * The palette is `tokens.json`. Write colours only as placeholders: `stroke="{{blue}}"`,
-  `fill="{{sand}}"`. The build writes one SVG per variant: `dark` for dark sidebars, `light` for
-  light sidebars.
+  `fill="{{sand}}"`. The build writes one SVG per mode: `dark` for dark sidebars, `light` for
+  light sidebars, `hc` for both high contrast themes.
 * **At most 2 tokens per icon**: 1 *main* (identity) and optionally 1 *accent*.
   * The main token carries the identity (a language, tool or category).
   * The accent is only for a role or meaning. Examples: the green check on test files, the `sand`
@@ -183,10 +193,10 @@ Corner marks (`MARKS` in glyphs.mjs; use `mark(name, token)`):
   lockfiles get the box + `lock` mark.
 * Secrets (`.env`, keys, certs) get a **key** symbol (`yellow` for env, `sand` for certs).
 
-## 7. Pixel pitfalls (the linter flags most of these)
+## 7. Pixel pitfalls
 
-* **Implicit close.** `M3.5 1.5h6l3 3v10h-9z` closes with an *implicit* vertical segment. resvg
-  (and so our previews) draws that segment slanted when caps are round. Always end at the start
+* **Implicit close.** `M3.5 1.5h6l3 3v10h-9z` closes with an *implicit* vertical segment. Some
+  renderers (resvg) draw that segment slanted when caps are round. Always end at the start
   point before `Z`: `…h-9v-13z`. The helpers already do this.
 * **Missing `fill="none"`.** A stroked path without `fill="none"` is also filled black.
 * **Butt caps** on `.5` endpoints blur the last pixel. Always use round caps.
@@ -199,8 +209,8 @@ Corner marks (`MARKS` in glyphs.mjs; use `mark(name, token)`):
 
 ## 8. Visual weight balance
 
-Icons sit in a list, so they must weigh about the same. `render.mjs` prints **ink** (alpha
-coverage of the 1x render) and the **ink box** under each label:
+Icons sit in a list, so they must weigh about the same. **Ink** is the alpha coverage of the 1x
+render and the **ink box** is the rectangle that holds it:
 
 | family | ink | ink box |
 |---|---|---|
@@ -210,7 +220,7 @@ coverage of the 1x render) and the **ink box** under each label:
 | page | ~18% | 10×14 |
 | folders | 45–60% | 14×12 |
 
-* The linter warns if a file icon is **< 9% or > 30% ink**, or its ink box is **< 10×9**.
+* Keep a file icon **between 9% and 30% ink**, and its ink box **at least 10×9**.
 * A symbol made only of 1px lines usually needs **one solid focal element** (the JSON value dot,
   the slider knobs, the image sun) to hold its own next to chips.
 * Use the full live area. A symbol only 7px tall looks like a smaller icon.
@@ -234,8 +244,8 @@ coverage of the 1x render) and the **ink box** under each label:
   x ≥ 8, y ≥ 8 is removed, which leaves a 1px knock-out ring so the badge reads on the sidebar
   background at 1x.
 * Badge ink: 1px round strokes on pixel centres (9.5 … 15.5) or integer fills, **inside the
-  slot** (the linter checks). Draw the badge in the **folder's own token** unless there is a
-  strong reason for an accent.
+  slot**. Draw the badge in the **folder's own token** unless there is a strong reason for an
+  accent.
 * Ready-made badges (`BADGES` in folder.mjs): `code` `</>`, `check`, `lines`, `sliders`, `output`,
   `image`, `prompt` `>_`, `box`, `globe`, `key`, `branch`, `database`. Reuse them. If you add one,
   it must read at 1x in the 7×7 slot.
@@ -262,7 +272,7 @@ Suggested folder colours:
 
 ## 11. Drawing notes: tested snippets
 
-These were rendered and checked at 1x (all lint clean, ink in range). Start from them.
+These were rendered and checked at 1x (ink in range). Start from them.
 
 * **Chip**: always `chip()`. Letters centre on (8.5, 7.5), and 1/2/3-letter monograms all centre
   exactly (the tile is 15 wide, glyph runs are odd). Multi-colour letters: `letters: [a, b]`.
@@ -272,7 +282,7 @@ These were rendered and checked at 1x (all lint clean, ink in range). Start from
   a box with a slanted lid and a handle slot. Don't copy npm/NuGet/Maven marks.
 * **Lockfile**: the box notched for the mark:
   `stroke("M2.5 5.5h11v4M9.5 13.5h-7v-8M4.5 2.5h7l2 3M4.5 2.5l-2 3M6.5 8.5h3", tk) + mark("lock", "muted")`.
-* **Tool / language config**: the `settings` exemplar with the owner's token:
+* **Tool / language config**: the generic sliders (`config`) in the owner's token:
   `stroke("M2.5 4.5h11M2.5 8.5h11M2.5 12.5h11", tk, { opacity: ".5" }) + dot(9, 3, tk) + dot(4, 7, tk) + dot(8, 11, tk)`.
 * **Shell / terminal**: the framed prompt (a bare `>_` is only 4% ink, too light):
   `stroke(rrect(1.5, 2.5, 13, 11, 1.5) + "M4.5 6.5l2 2-2 2M8.5 10.5h3", "sage")`.
@@ -297,57 +307,59 @@ These were rendered and checked at 1x (all lint clean, ink in range). Start from
 
 ## 13. Deliverable format (exact)
 
-Write one ES module per batch in your own folder `icons/work/<your-name>/`:
+A drawing is an entry in one of the ES modules of `src/icons/drawn/` (add to an existing module or
+create `src/icons/drawn/<name>.mjs`; every `.mjs` file in that folder is loaded):
 
 ```js
-// icons/work/<your-name>/<batch>.mjs
-import { chip, page, lines, dot, mark, monogram, stroke, fill, rrect } from "../../system/glyphs.mjs";
-import { BADGES } from "../../system/folder.mjs";
+// src/icons/drawn/<name>.mjs
+import { chip, page, lines, dot, mark, monogram, stroke, fill, rrect } from "../system/glyphs.mjs";
+import { BADGES } from "../system/folder.mjs";
 
-// FILE ICONS: id → inner SVG markup (string) with {{token}} placeholders.
-// The markup is placed inside <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">.
+// FILE ICONS: concept id → inner SVG markup (string) with {{token}} placeholders.
+// The build wraps it in <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">.
 export const icons = {
   "typescript": chip("TS", "blue"),
   "json": `<path d="M5.5 2.5h-1l-1 1v3l-1 1v1l1 1v3l1 1h1" fill="none" stroke="{{sand}}" stroke-linecap="round" stroke-linejoin="round"/>`,
 };
 
-// FOLDER BATCH: id → { token, badge }. Closed/open shapes come from folder.mjs.
+// FOLDERS: concept id → { token, badge }. Closed/open shapes come from folder.mjs.
 export const folders = {
-  "folder-src": { token: "blue", badge: BADGES.code("blue") },
-  "folder-docs": { token: "teal", badge: BADGES.lines("teal") },
+  "src": { token: "blue", badge: BADGES.code("blue") },
+  "docs": { token: "teal", badge: BADGES.lines("teal") },
 };
 ```
 
-Rules:
-* Ids are kebab-case, unique and descriptive: `typescript`, `typescript-test`, `typescript-def`,
-  `typescript-react`, `folder-src`. Folder ids start with `folder-`.
-* Values are **strings** (helpers return strings, and hand-written markup is fine).
-* Allowed elements: `<path>` (preferred), `<rect>`, `<circle>`, `<line>`, `<polyline>`,
-  `<polygon>`, `<g>` without attributes other than presentation ones. Allowed attributes: `d`,
-  geometry, `fill`, `stroke`, `stroke-width`, `stroke-linecap`, `stroke-linejoin`,
-  `fill-opacity`, `stroke-opacity`, `fill-rule`. **No** `id`, `class`, `style`, `transform`,
-  `<text>`, `<image>`, `<use>`, `<mask>`, `<clipPath>`, `<filter>`, gradients, `url()`, `href`.
-* Keep markup tiny: under ~600 chars typical, and the linter warns above 1200.
+Most existing modules hold plain strings (the helper calls were inlined); `drawn/folders.mjs`
+imports the helpers. Both forms are fine.
+
+Rules (the build enforces the ones marked ✔ and stops with a message that names the icon):
+* ✔ The id is the concept id in `mapping.json`: lowercase letters, digits, `-` and `_`, starting
+  with a letter (`typescript`, `typescript-test`, `node_modules`). Folder ids have **no** `folder-`
+  prefix; the build names the files `folder-<id>.svg` and `folder-<id>-open.svg`.
+* ✔ Every concept in `mapping.json` needs a drawing here, every drawing needs a concept, and an id
+  is drawn in only one module.
+* ✔ Values are non-empty **strings** (helpers return strings, and hand-written markup is fine).
+* ✔ Allowed element: `<path .../>` only. Allowed attributes: `d`, `fill`, `stroke`, `stroke-width`,
+  `stroke-linecap`, `stroke-linejoin`, `fill-opacity`, `stroke-opacity`, `fill-rule`. Everything
+  else is refused: `<script>`, `<text>`, `<image>`, `<use>`, `<g>`, `id`, `class`, `style`,
+  `transform`, event handlers, `href`, `url()`.
+* ✔ Colours are `{{token}}` placeholders that exist in `tokens.json`; opacities are `.2` or `.5`.
+* Keep markup tiny: under ~600 characters is typical.
 * The module must be side-effect free and deterministic (no randomness, no file I/O).
 
 ## 14. Workflow
 
-```bash
-cd icons/work/<your-name>
-node ../../system/render.mjs batch.mjs batch.png --context --compare
-```
-
-* `batch.png` has one row per icon (folders show closed + open). The columns are dark sidebar
-  `#16171d` 1x + 2x, dark editor `#1b1c23`, light sidebar `#ecedf3`, light editor `#f6f6fb`, then
-  a 4x nearest-neighbour zoom of the 1x render on dark and on light. Pages hold 16 rows, and extra
-  pages are `batch-2.png` and so on. `--rows N` changes that, `--ids a,b` renders a subset, and
-  `--no-zoom` makes it compact.
-* `batch-context.png` is a mock explorer at 1x and 2x, and `--compare` puts the exemplars above
-  your icons. **Judge legibility at 1x**, and use the zoom only to find the pixel you need to move.
-* The console lists lint warnings per icon (red dot in the sheet). **Deliver lint clean.**
-  `--strict` exits non-zero on warnings.
-* Iterate until: legible at 1x on both dark and light, weight matches the exemplars, no two icons
-  in your batch are confusable, and nothing resembles a real logo.
+1. Add the concept to `src/icons/mapping.json` (id, description and its `fileExtensions` /
+   `fileNames` / `languageIds`, or `names` for a folder). The key rules are in `src/icons/spec.md`,
+   section 8.
+2. Draw it in a module of `src/icons/drawn/`.
+3. Run `node build.mjs` in the repository root. It regenerates `icons/` (only files whose content
+   changed are rewritten) or lists what is wrong and writes nothing.
+4. Press F5 and look at a folder that contains the file (`exemplos/` opens by default; after a
+   rebuild use *Developer: Reload Window*). **Judge legibility at 100% zoom**, on a dark, a light
+   and a high contrast Serena theme.
+5. Iterate until: legible at 1x in every mode, weight matches the neighbours, no two icons are
+   confusable, and nothing resembles a real logo. Commit `src/` together with the generated `icons/`.
 
 ## 15. Helper reference (`glyphs.mjs`, `folder.mjs`)
 
@@ -385,29 +397,44 @@ node ../../system/render.mjs batch.mjs batch.png --context --compare
 
 ## 16. Palette (tokens.json)
 
-> `tokens.json` also has an **`hc`** set used by the `highContrast` section of the icon themes (both hc-black and hc-light). It is one mid-to-light set: 6.0–7.0:1 on #000 and at least 3.0:1 on #fff, with the same hue per token. In hc mode the build raises `.5` opacities to `.65` and `.2` to `.3`. The tables below cover the dark and light sets.
+> The **`hc`** set is used by the `highContrast` section of the icon themes, which VS Code applies to
+> both high contrast theme types, so one set has to work on black and on white. Every `hc` token has
+> the same relative luminance (0.21), with the hue of its dark/light sibling: 4.0–4.1:1 on `#ffffff`
+> (Serena High Contrast Light side bar; 3.15–3.19 on its selected row `#e6e1fa`) and 4.8–4.9:1 on
+> `#0b0c12` (Serena High Contrast side bar; 3.41–3.46 on its selected row `#2c2656`). This is a
+> trade: the set of 1.0.2 was brighter on black (5.6–6.5:1 on `#0b0c12`, 3.9–4.6 on its selected
+> row) but reached only 3.0–3.5:1 on `#ffffff`, and most of its tokens fell under 3:1 on that
+> theme's hover and selected rows. In hc mode the build raises `.5` opacities to `.85` (secondary
+> parts stay ≥ 3.1:1 on both side bars). The price: the solid and the secondary layer of one icon
+> are only 1.2–1.3:1 apart in hc (1.5–2.0 with the old `.65`), so an open folder is told from a
+> closed one by its silhouette and the twistie, not by tone. Chip tiles stay at `.2` (they were
+> raised to `.3` in 1.0.2), because a stronger tile lowers the contrast of the letters on white
+> (letters against their tile: 3.07–3.21 on `#ffffff`, 3.89–4.00 on `#0b0c12`); the tile itself is
+> fainter for it, 1.2–1.3:1 against the row (1.5–1.6 on black before). The closest `hc` pairs are
+> `fg`/`grey` 7.9, `grey`/`muted` 9.2 and `sand`/`orange` 9.3 (CIEDE2000). The rest of this section
+> covers the dark and light sets.
 
-| token | dark | light |
-|---|---|---|
-| fg | `#d4d4dc` | `#323445` |
-| grey | `#a4a6b8` | `#626577` |
-| muted | `#7f839c` | `#818397` |
-| blue | `#8cb4e8` | `#2370bd` |
-| lavender | `#c4a7e7` | `#8a5fa9` |
-| purple | `#988cfc` | `#6a43c4` |
-| sage | `#a6d189` | `#53803c` |
-| green | `#6bcf9d` | `#008b56` |
-| teal | `#91d1d7` | `#1b7e80` |
-| cyan | `#62c5ef` | `#0080a6` |
-| sand | `#e8c889` | `#94661b` |
-| yellow | `#edde67` | `#8c7600` |
-| peach | `#f0a782` | `#b85c37` |
-| orange | `#fb9f44` | `#b66001` |
-| rust | `#db795b` | `#993c23` |
-| rose | `#e88b9a` | `#b44b6e` |
-| red | `#ef6567` | `#c22630` |
-| pink | `#ee97c9` | `#b84999` |
-| brown | `#b08a69` | `#7a5432` |
+| token | dark | light | hc |
+|---|---|---|---|
+| fg | `#d4d4dc` | `#323445` | `#7f7f7f` |
+| grey | `#a4a6b8` | `#626577` | `#787f8f` |
+| muted | `#7f839c` | `#76778b` | `#7e7b9f` |
+| blue | `#8cb4e8` | `#2370bd` | `#4e7ed3` |
+| lavender | `#c4a7e7` | `#8a5fa9` | `#9a6cb6` |
+| purple | `#988cfc` | `#6a43c4` | `#7a6bef` |
+| sage | `#a6d189` | `#53803c` | `#638a41` |
+| green | `#6bcf9d` | `#008b56` | `#009066` |
+| teal | `#91d1d7` | `#1b7e80` | `#2f8b8b` |
+| cyan | `#62c5ef` | `#0080a6` | `#1788b1` |
+| sand | `#e8c889` | `#94661b` | `#9d792a` |
+| yellow | `#edde67` | `#8c7600` | `#85821a` |
+| peach | `#f0a782` | `#b85c37` | `#c1662d` |
+| orange | `#fb9f44` | `#b66001` | `#b56f00` |
+| rust | `#db795b` | `#993c23` | `#c46152` |
+| rose | `#e88b9a` | `#b44b6e` | `#c55c80` |
+| red | `#ef6567` | `#c22630` | `#e73c5a` |
+| pink | `#ee97c9` | `#b84999` | `#c652a9` |
+| brown | `#b08a69` | `#7a5432` | `#9f7656` |
 
 ### Rationale
 
@@ -430,15 +457,19 @@ node ../../system/render.mjs batch.mjs batch.png --context --compare
   is separated mostly by lightness, because hue alone can't separate them at 3:1 on a light
   background. Light `yellow` is necessarily a deep gold.
 * **Contrast** (WCAG non-text ≥ 3:1): every token passes on **both** sidebar and editor
-  backgrounds. The lowest values are dark `muted` 4.55:1 on `#1b1c23` and light `muted` 3.19:1 on
-  `#ecedf3`. The dark values also pass on Serena Dark Vivid's `#13141b`. On the list selection
-  background (`#2c2f40` dark / `#d7dbf1` light) everything stays ≥ 3:1 except light `muted`
-  (2.72). Selection is a transient state and the shapes still read.
+  backgrounds. The lowest values are dark `muted` 4.55:1 on `#1b1c23` and light `green` 3.72:1 on
+  `#ecedf3` (light `muted` is 3.76). The dark values also pass on Serena Dark Vivid's `#13141b`.
+  On the list selection background (`#2c2f40` dark / `#d7dbf1` light) everything stays ≥ 3:1: the
+  lowest are dark `muted` 3.55, light `green` 3.17 and light `muted` 3.20. Light `muted` was
+  `#818397` (2.72 on the selection, 2.99 on hover) until it was darkened to `#76778b`: it is the
+  colour of the default file and folder, so it has to hold on every row state.
 * **Chip letters vs their own tile.** A chip monogram sits on its 20% tile, not on the sidebar, so
   that pair is checked too (tile = token at .2 over the background). Dark: every token ≥ 4.2:1
-  (`muted` 3.68). Light on `#ecedf3`: every chip token ≥ 3.0:1; the lowest are `cyan` 3.02,
-  `yellow` 3.03, `orange` 3.03 and `peach` 3.06. Exceptions by design: `muted` 2.63 (generated
-  chips are meant to recede) and `green` 2.91 (only ever a mark on the background, never a tile).
+  (`muted` 3.68). Light on `#ecedf3`: every chip token ≥ 3.0:1; the lowest are `muted` 3.01,
+  `cyan` 3.02, `yellow` 3.03, `orange` 3.03 and `peach` 3.06. Exception by design: `green` 2.91
+  (only ever a mark on the background, never a tile). On hover and selected rows of the light
+  themes several chips drop to 2.5–2.9 against their tile; the letters still read because they
+  also contrast with the row itself.
   Light `cyan` `yellow` `peach` `orange` were darkened for this (OKLCH lightness drops of
   0.01–0.045, hue within 1.2° and chroma within 0.009 of the originals `#0683aa` `#967f00`
   `#bf623d` `#c86c00`).
@@ -449,7 +480,7 @@ Contrast table (WCAG ratio):
 |---|---|---|---|---|
 | fg | 12.13 | 11.52 | 10.49 | 11.38 |
 | grey | 7.43 | 7.05 | 4.93 | 5.34 |
-| muted | 4.79 | 4.55 | 3.19 | 3.46 |
+| muted | 4.79 | 4.55 | 3.76 | 4.08 |
 | blue | 8.35 | 7.93 | 4.36 | 4.73 |
 | lavender | 8.54 | 8.11 | 4.19 | 4.54 |
 | purple | 6.38 | 6.06 | 5.59 | 6.07 |
@@ -469,12 +500,15 @@ Contrast table (WCAG ratio):
 
 ### Distinguishability (CIEDE2000)
 
-**All 171 pairs are ≥ 10 in both modes.** The closest pairs are the intended hue neighbours:
+**All 171 pairs are ≥ 10 in dark, and 170 of 171 in light.** The exception is light `grey`/`muted`
+(7.4): `muted` was darkened to keep 3:1 on hover and selected rows, and the two neutrals never
+separate two icons by colour alone (`muted` is "quiet", `grey` is "present"). The closest pairs
+are the intended hue neighbours:
 
 * dark: rust/red 10.5 · sage/green 11.1 · rose/pink 11.2 · peach/orange 11.3 · sand/yellow 11.4 ·
   blue/cyan 11.5 · teal/cyan 11.6 · rose/red 11.6 · grey/muted 11.7
-* light: sand/orange 10.1 · rust/red 10.2 · sage/green 10.3 · peach/orange 10.5 · sand/yellow 10.7 ·
-  rose/pink 10.8 · peach/rust 11.2 · sand/brown 11.2 · lavender/pink 11.9
+* light: grey/muted 7.4 · sand/orange 10.1 · rust/red 10.2 · sage/green 10.3 · peach/orange 10.5 ·
+  sand/yellow 10.7 · rose/pink 10.8 · peach/rust 11.2 · sand/brown 11.2
 
 The closest pairs (≈10–11) are distinguishable side by side but not from memory. Don't rely on
 colour alone to separate two icons that share a shape (e.g. `rust` vs `red`).
@@ -508,23 +542,23 @@ Full matrix, light:
 
 ```
           fg  grey muted  blue laven purpl  sage green  teal  cyan  sand yello peach orang  rust  rose   red  pink brown
-fg       -    16.8  28.5  27.4  26.1  24.2  39.4  39.3  32.5  31.7  38.3  43.3  37.6  41.3  31.8  31.4  35.3  31.6  28.6
-grey    16.8   -    12.1  18.6  16.5  20.0  32.6  31.6  24.2  21.8  32.4  36.5  30.5  34.7  29.7  24.9  31.4  23.9  25.4
-muted   28.5  12.1   -    20.6  17.4  25.0  33.1  31.4  25.5  22.3  33.7  36.8  30.4  34.8  33.8  25.7  33.6  23.9  29.9
-blue    27.4  18.6  20.6   -    24.1  21.1  49.2  42.4  24.4  12.1  47.2  52.3  43.7  48.5  43.6  38.0  44.9  36.0  40.3
-laven   26.1  16.5  17.4  24.1   -    12.3  60.9  44.2  33.4  31.4  47.2  56.0  36.3  45.5  35.3  19.1  32.2  11.9  37.9
-purpl   24.2  20.0  25.0  21.1  12.3   -    52.1  49.3  33.9  27.8  54.6  64.8  43.5  52.8  40.4  26.6  37.7  19.8  43.7
-sage    39.4  32.6  33.1  49.2  60.9  52.1   -    10.3  24.1  39.9  28.2  20.5  43.9  39.1  47.5  57.9  57.7  66.0  30.3
-green   39.3  31.6  31.4  42.4  44.2  49.3  10.3   -    18.9  33.8  36.6  29.3  52.2  47.3  56.0  65.9  67.0  72.5  37.7
-teal    32.5  24.2  25.5  24.4  33.4  33.9  24.1  18.9   -    13.6  37.1  35.3  44.3  43.3  46.3  51.3  52.8  42.2  35.4
+fg       -    16.8  23.8  27.4  26.1  24.2  39.4  39.3  32.5  31.7  38.3  43.3  37.6  41.3  31.8  31.4  35.3  31.6  28.6
+grey    16.8   -     7.4  18.6  16.5  20.0  32.6  31.6  24.2  21.8  32.4  36.5  30.5  34.7  29.7  24.9  31.4  23.9  25.4
+muted   23.8   7.4   -    19.6  15.8  22.5  32.7  31.3  25.2  22.3  32.9  36.7  29.8  34.4  31.5  24.2  31.9  22.7  27.6
+blue    27.4  18.6  19.6   -    24.1  21.1  49.2  42.4  24.4  12.1  47.2  52.3  43.7  48.5  43.6  38.0  44.9  36.0  40.3
+laven   26.1  16.5  15.8  24.1   -    12.3  60.9  44.2  33.4  31.4  47.2  56.0  36.3  45.5  35.3  19.1  32.2  11.9  37.9
+purpl   24.2  20.0  22.5  21.1  12.3   -    52.1  49.3  33.9  27.8  54.6  64.8  43.5  52.8  40.4  26.6  37.7  19.8  43.7
+sage    39.4  32.6  32.7  49.2  60.9  52.1   -    10.3  24.1  39.9  28.2  20.5  43.9  39.1  47.5  57.9  57.7  66.0  30.3
+green   39.3  31.6  31.3  42.4  44.2  49.3  10.3   -    18.9  33.8  36.6  29.3  52.2  47.3  56.0  65.9  67.0  72.5  37.7
+teal    32.5  24.2  25.2  24.4  33.4  33.9  24.1  18.9   -    13.6  37.1  35.3  44.3  43.3  46.3  51.3  52.8  42.2  35.4
 cyan    31.7  21.8  22.3  12.1  31.4  27.8  39.9  33.8  13.6   -    44.6  47.1  47.7  47.3  49.8  51.3  55.7  47.0  39.1
-sand    38.3  32.4  33.7  47.2  47.2  54.6  28.2  36.6  37.1  44.6   -    10.7  16.8  10.1  20.9  37.5  29.5  47.6  11.2
-yello   43.3  36.5  36.8  52.3  56.0  64.8  20.5  29.3  35.3  47.1  10.7   -    27.3  20.0  32.2  47.7  41.4  58.1  19.4
-peach   37.6  30.5  30.4  43.7  36.3  43.5  43.9  52.2  44.3  47.7  16.8  27.3   -    10.5  11.2  23.2  13.8  33.0  15.5
-orang   41.3  34.7  34.8  48.5  45.5  52.8  39.1  47.3  43.3  47.3  10.1  20.0  10.5   -    17.5  34.2  23.7  44.3  15.6
-rust    31.8  29.7  33.8  43.6  35.3  40.4  47.5  56.0  46.3  49.8  20.9  32.2  11.2  17.5   -    21.8  10.2  31.7  13.7
-rose    31.4  24.9  25.7  38.0  19.1  26.6  57.9  65.9  51.3  51.3  37.5  47.7  23.2  34.2  21.8   -    16.3  10.8  28.5
-red     35.3  31.4  33.6  44.9  32.2  37.7  57.7  67.0  52.8  55.7  29.5  41.4  13.8  23.7  10.2  16.3   -    26.0  22.6
-pink    31.6  23.9  23.9  36.0  11.9  19.8  66.0  72.5  42.2  47.0  47.6  58.1  33.0  44.3  31.7  10.8  26.0   -    37.6
-brown   28.6  25.4  29.9  40.3  37.9  43.7  30.3  37.7  35.4  39.1  11.2  19.4  15.5  15.6  13.7  28.5  22.6  37.6   -
+sand    38.3  32.4  32.9  47.2  47.2  54.6  28.2  36.6  37.1  44.6   -    10.7  16.8  10.1  20.9  37.5  29.5  47.6  11.2
+yello   43.3  36.5  36.7  52.3  56.0  64.8  20.5  29.3  35.3  47.1  10.7   -    27.3  20.0  32.2  47.7  41.4  58.1  19.4
+peach   37.6  30.5  29.8  43.7  36.3  43.5  43.9  52.2  44.3  47.7  16.8  27.3   -    10.5  11.2  23.2  13.8  33.0  15.5
+orang   41.3  34.7  34.4  48.5  45.5  52.8  39.1  47.3  43.3  47.3  10.1  20.0  10.5   -    17.5  34.2  23.7  44.3  15.6
+rust    31.8  29.7  31.5  43.6  35.3  40.4  47.5  56.0  46.3  49.8  20.9  32.2  11.2  17.5   -    21.8  10.2  31.7  13.7
+rose    31.4  24.9  24.2  38.0  19.1  26.6  57.9  65.9  51.3  51.3  37.5  47.7  23.2  34.2  21.8   -    16.3  10.8  28.5
+red     35.3  31.4  31.9  44.9  32.2  37.7  57.7  67.0  52.8  55.7  29.5  41.4  13.8  23.7  10.2  16.3   -    26.0  22.6
+pink    31.6  23.9  22.7  36.0  11.9  19.8  66.0  72.5  42.2  47.0  47.6  58.1  33.0  44.3  31.7  10.8  26.0   -    37.6
+brown   28.6  25.4  27.6  40.3  37.9  43.7  30.3  37.7  35.4  39.1  11.2  19.4  15.5  15.6  13.7  28.5  22.6  37.6   -
 ```

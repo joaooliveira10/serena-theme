@@ -22,13 +22,13 @@
     "editor.lineHighlightBorder": "#6c6994",
     "editor.selectionBackground": "#cbb8ff",
     "editor.inactiveSelectionBackground": "#a39ad8",
-    "editor.selectionHighlightBackground": "#d4c0ff1a",
-    "editor.wordHighlightBackground": "#6aaeff1a",
-    "editor.wordHighlightStrongBackground": "#d4c0ff1a",
-    "editor.findMatchBackground": "#ffb4541f",
+    "editor.selectionHighlightBackground": "#00000000",
+    "editor.wordHighlightBackground": "#00000000",
+    "editor.wordHighlightStrongBackground": "#00000000",
+    "editor.findMatchBackground": "#00000000",
     "editor.findMatchBorder": "#ffb454",
-    "editor.findMatchHighlightBackground": "#ffb4541a",
-    "editor.rangeHighlightBackground": "#eba57a14",
+    "editor.findMatchHighlightBackground": "#00000000",
+    "editor.rangeHighlightBackground": "#00000000",
     "editorWhitespace.foreground": "#5d5f73",
     "editorIndentGuide.background1": "#4a4c5e",
     "editorIndentGuide.activeBackground1": "#7c7e94",
@@ -55,8 +55,8 @@
     "editorBracketPairGuide.activeBackground4": "#dcc4ff",
     "editorBracketPairGuide.activeBackground5": "#7ed468",
     "editorBracketPairGuide.activeBackground6": "#64a4ff",
-    "editor.linkedEditingBackground": "#ff7a8c1a",
-    "editorBracketMatch.background": "#f2f2f814",
+    "editor.linkedEditingBackground": "#ff7a8c12",
+    "editorBracketMatch.background": "#00000000",
     "editorBracketMatch.border": "#f2f2f8",
     "editorOverviewRuler.bracketMatchForeground": "#cfd0dc",
     "editorCodeLens.foreground": "#a4a6b8",
@@ -86,16 +86,19 @@
     "editorHoverWidget.border": "#9d97e0",
     "editorGroupHeader.tabsBackground": "#0b0c12",
     "editorGroup.border": "#9d97e0",
-    "scrollbarSlider.background": "#9d97e066",
+    "scrollbarSlider.background": "#9d97e08f",
     "scrollbarSlider.hoverBackground": "#9d97e0a6",
     "scrollbarSlider.activeBackground": "#9d97e0",
     "minimap.background": "#0b0c12",
+    "minimapSlider.background": "#9d97e08f",
+    "minimapSlider.hoverBackground": "#9d97e0a6",
+    "minimapSlider.activeBackground": "#9d97e0cc",
     "breadcrumb.foreground": "#a4a6b8",
     "breadcrumb.focusForeground": "#f2f2f8",
     "breadcrumb.activeSelectionForeground": "#f2f2f8",
     "peekView.border": "#9d97e0",
     "peekViewEditor.background": "#0b0c12",
-    "peekViewEditor.matchHighlightBackground": "#ffb4541f",
+    "peekViewEditor.matchHighlightBackground": "#00000000",
     "peekViewResult.background": "#0b0c12",
     "peekViewResult.selectionBackground": "#2c2656",
     "peekViewResult.selectionForeground": "#f2f2f8",
@@ -225,17 +228,19 @@
     "gitDecoration.submoduleResourceForeground": "#cfd0dc",
     "gitDecoration.ignoredResourceForeground": "#9a9cae",
     "diffEditor.insertedLineBackground": "#2ea04314",
-    "diffEditor.insertedTextBackground": "#2ea0431f",
+    "diffEditor.insertedTextBackground": "#00000000",
     "diffEditor.removedLineBackground": "#e5484d14",
-    "diffEditor.removedTextBackground": "#e5484d1f",
+    "diffEditor.removedTextBackground": "#00000000",
+    "diffEditorOverview.insertedForeground": "#8fe07acc",
+    "diffEditorOverview.removedForeground": "#ff7a8ccc",
     "merge.currentHeaderBackground": "#2ea0432e",
     "merge.currentContentBackground": "#2ea04314",
     "merge.incomingHeaderBackground": "#3b82f62e",
     "merge.incomingContentBackground": "#3b82f614",
     "merge.commonHeaderBackground": "#a4a6b81f",
-    "merge.commonContentBackground": "#a4a6b814",
-    "editor.stackFrameHighlightBackground": "#d299221a",
-    "editor.focusedStackFrameHighlightBackground": "#2ea0431a",
+    "merge.commonContentBackground": "#a4a6b811",
+    "editor.stackFrameHighlightBackground": "#d2992212",
+    "editor.focusedStackFrameHighlightBackground": "#2ea04316",
     "debugIcon.breakpointForeground": "#ff7a8c",
     "debugIcon.breakpointDisabledForeground": "#9a9cae",
     "debugIcon.breakpointUnverifiedForeground": "#a4a6b8",
@@ -297,6 +302,7 @@
     "chat.editedFileForeground": "#6aaeff",
     "chat.linesAddedForeground": "#8fe07a",
     "chat.linesRemovedForeground": "#ff7a8c",
+    "chat.mcpCompatibilityWarningForeground": "#f8d457",
     "chat.requestBorder": "#9d97e0",
     "chat.requestCodeBorder": "#6aaeff",
     "chat.slashCommandBackground": "#3b82f61a",
@@ -321,17 +327,18 @@
     "diffEditor.diagonalFill": "#a4a6b866",
     "diffEditor.move.border": "#cfd0dc",
     "diffEditor.moveActive.border": "#ffb454",
-    "diffEditor.unchangedCodeBackground": "#a4a6b814",
+    "diffEditor.unchangedCodeBackground": "#a4a6b811",
     "diffEditor.unchangedRegionShadow": "#00000000",
     "disabledForeground": "#9a9cae",
     "editor.compositionBorder": "#f2f2f8",
-    "editor.findRangeHighlightBackground": "#d4c0ff14",
+    "editor.findRangeHighlightBackground": "#00000000",
     "editor.foldPlaceholderForeground": "#a4a6b8",
-    "editor.hoverHighlightBackground": "#6aaeff1a",
+    "editor.hoverHighlightBackground": "#6aaeff11",
     "editor.inlineValuesBackground": "#d299221a",
     "editor.inlineValuesForeground": "#cfd0dc",
     "editor.snippetFinalTabstopHighlightBorder": "#cfd0dc",
-    "editor.snippetTabstopHighlightBackground": "#a4a6b81f",
+    "editor.snippetTabstopHighlightBackground": "#00000000",
+    "editor.snippetTabstopHighlightBorder": "#9d97e0",
     "editorGhostText.foreground": "#9a9cae",
     "editorGroup.dropBackground": "#3b82f640",
     "editorGutter.addedSecondaryBackground": "#8fe07a99",
@@ -373,7 +380,7 @@
     "mergeEditor.conflict.unhandled.minimapOverViewRuler": "#eba57a",
     "mergeEditor.conflict.unhandledFocused.border": "#eba57a",
     "mergeEditor.conflict.unhandledUnfocused.border": "#eba57ab3",
-    "mergeEditor.conflictingLines.background": "#d299221a",
+    "mergeEditor.conflictingLines.background": "#d2992212",
     "minimap.findMatchHighlight": "#ffb454",
     "minimap.selectionOccurrenceHighlight": "#d4c0ff99",
     "multiDiffEditor.headerBackground": "#0b0c12",
@@ -394,7 +401,7 @@
     "scmGraph.historyItemHoverAdditionsForeground": "#8fe07a",
     "scmGraph.historyItemHoverDeletionsForeground": "#ff7a8c",
     "scrollbar.shadow": "#00000000",
-    "searchEditor.findMatchBackground": "#ffb4541a",
+    "searchEditor.findMatchBackground": "#00000000",
     "settings.focusedRowBackground": "#191a28",
     "settings.headerForeground": "#f2f2f8",
     "settings.modifiedItemIndicator": "#6aaeff",
@@ -423,6 +430,7 @@
     "terminal.initialHintForeground": "#a4a6b8",
     "terminalCommandGuide.foreground": "#7c7e94",
     "terminalOverviewRuler.cursorForeground": "#cfd0dc",
+    "terminalOverviewRuler.findMatchForeground": "#ffb454",
     "terminalStickyScrollHover.background": "#191a28",
     "testing.coveredGutterBackground": "#8fe07a99",
     "testing.coveredMinimapBackground": "#8fe07a99",
@@ -578,7 +586,8 @@
         "string",
         "string.quoted",
         "string.template",
-        "punctuation.definition.string"
+        "punctuation.definition.string",
+        "property.value.dotenv"
       ],
       "settings": {
         "foreground": "#a8ec88"
@@ -626,6 +635,25 @@
       ],
       "settings": {
         "foreground": "#adaeb5"
+      }
+    },
+    {
+      "name": "Python regex: referências \\1 e (?P=nome) como no JS (a gramática as marca como tag)",
+      "scope": [
+        "entity.name.tag.backreference.regexp",
+        "entity.name.tag.named.backreference.regexp"
+      ],
+      "settings": {
+        "foreground": "#e0b6ff"
+      }
+    },
+    {
+      "name": "Python regex: nome do grupo (?P<nome>) como no JS (a gramática o marca como tag)",
+      "scope": [
+        "entity.name.tag.named.group.regexp"
+      ],
+      "settings": {
+        "foreground": "#f2f2f8"
       }
     },
     {
@@ -731,7 +759,8 @@
         "variable.language.special.self",
         "variable.language.special.cls",
         "variable.parameter.function.language.special.self",
-        "variable.parameter.function.language.special.cls"
+        "variable.parameter.function.language.special.cls",
+        "variable.language.java"
       ],
       "settings": {
         "foreground": "#ff7a8c",
@@ -751,7 +780,10 @@
         "entity.name.tag.yaml",
         "support.type.property-name",
         "variable.other.constant.property",
-        "keyword.other.definition.ini"
+        "keyword.other.definition.ini",
+        "variable.key.dotenv",
+        "variable.other.env",
+        "variable.interpolation.dotenv"
       ],
       "settings": {
         "foreground": "#44d3d4"
@@ -966,7 +998,8 @@
     {
       "name": "Diff",
       "scope": [
-        "markup.inserted"
+        "markup.inserted",
+        "markup.inserted punctuation.definition.inserted"
       ],
       "settings": {
         "foreground": "#a8ec88"
@@ -974,7 +1007,8 @@
     },
     {
       "scope": [
-        "markup.deleted"
+        "markup.deleted",
+        "markup.deleted punctuation.definition.deleted"
       ],
       "settings": {
         "foreground": "#ff7a8c"
@@ -982,10 +1016,58 @@
     },
     {
       "scope": [
-        "markup.changed"
+        "markup.changed",
+        "markup.changed punctuation.definition.changed"
       ],
       "settings": {
         "foreground": "#4aa6ff"
+      }
+    },
+    {
+      "name": "Diff: cabeçalhos (diff --git, --- a/arquivo, +++ b/arquivo)",
+      "scope": [
+        "meta.diff.header"
+      ],
+      "settings": {
+        "foreground": "#e0b6ff"
+      }
+    },
+    {
+      "name": "Diff: intervalo do hunk (@@ -12,9 +12,9 @@)",
+      "scope": [
+        "meta.diff.range"
+      ],
+      "settings": {
+        "foreground": "#44d3d4"
+      }
+    },
+    {
+      "name": "Diff: linha index (index 3f2a9c1..b7d4e02) discreta, na cor de comentário",
+      "scope": [
+        "meta.diff.index"
+      ],
+      "settings": {
+        "foreground": "#959fd6"
+      }
+    },
+    {
+      "name": "Log: erros e exceções na cor de erro",
+      "scope": [
+        "log.error",
+        "log.exception",
+        "log.exceptiontype"
+      ],
+      "settings": {
+        "foreground": "#ff7a8c"
+      }
+    },
+    {
+      "name": "Log: avisos na cor de aviso",
+      "scope": [
+        "log.warning"
+      ],
+      "settings": {
+        "foreground": "#f8d457"
       }
     },
     {
@@ -997,6 +1079,16 @@
       "settings": {
         "foreground": "#ff7a8c",
         "fontStyle": "underline"
+      }
+    },
+    {
+      "name": "Git commit: assunto entre 51 e 72 colunas é só um aviso (acima de 72 continua como erro)",
+      "scope": [
+        "invalid.deprecated.line-too-long.git-commit"
+      ],
+      "settings": {
+        "foreground": "#f8d457",
+        "fontStyle": ""
       }
     },
     {
@@ -1054,7 +1146,7 @@
       }
     },
     {
-      "name": "C#: operadores lógicos, de comparação e ?? (o Roslyn envia todos como 'operator')",
+      "name": "C#: operadores lógicos, de comparação e ?? (o Roslyn envia 'operator' ou 'operatorOverloaded'; os dois ficam como pontuação)",
       "scope": [
         "keyword.operator.logical.cs",
         "keyword.operator.comparison.cs",
@@ -1119,7 +1211,9 @@
         "comment.block.documentation.cs punctuation.definition.tag.cs",
         "comment.block.documentation.cs punctuation.separator.equals.cs",
         "comment.block.documentation.cs string.quoted.double.cs",
-        "comment.block.documentation.cs punctuation.definition.string"
+        "comment.block.documentation.cs punctuation.definition.string",
+        "comment.block.documentation.cs constant.character.entity",
+        "comment.block.documentation.cs constant.character.entity punctuation.definition.constant"
       ],
       "settings": {
         "foreground": "#959fd6"
@@ -1382,12 +1476,11 @@
       }
     },
     {
-      "name": "JSX/TSX: entidades HTML (&nbsp; &amp;) como escapes",
+      "name": "Entidades HTML/XML (&nbsp; &amp;) como escapes",
       "scope": [
-        "constant.character.entity.js",
-        "constant.character.entity.tsx",
-        "constant.character.entity.js punctuation.definition.entity",
-        "constant.character.entity.tsx punctuation.definition.entity"
+        "constant.character.entity",
+        "constant.character.entity punctuation.definition.entity",
+        "constant.character.entity punctuation.definition.constant"
       ],
       "settings": {
         "foreground": "#44d3d4"
@@ -1405,7 +1498,9 @@
     {
       "name": "Python 3.12+: declaração de parâmetros de tipo (class C[T], def f[T], type X[T])",
       "scope": [
-        "variable.parameter.type.typevar"
+        "variable.parameter.type.typevar",
+        "variable.parameter.type.paramspec",
+        "variable.parameter.type.typevartuple"
       ],
       "settings": {
         "foreground": "#f8d457",
@@ -1748,6 +1843,16 @@
       "settings": {
         "foreground": "#ff7a8c",
         "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Swift: parâmetros genéricos e associatedtype na declaração (os usos já são tipo)",
+      "scope": [
+        "variable.language.generic-parameter.swift",
+        "variable.language.associatedtype.swift"
+      ],
+      "settings": {
+        "foreground": "#f8d457"
       }
     },
     {
@@ -2900,6 +3005,10 @@
     "interface": "#f8d457",
     "namespace": "#f8d457",
     "function": "#4aa6ff",
+    "function.declaration": {
+      "foreground": "#4aa6ff",
+      "italic": false
+    },
     "method": "#4aa6ff",
     "variable:python": "#f2f2f8",
     "variable.readonly:python": "#eba57a",
@@ -2916,6 +3025,7 @@
       "foreground": "#4aa6ff",
       "italic": true
     },
+    "operatorOverloaded": "#adaeb5",
     "delegate": "#f8d457",
     "constant": "#eba57a",
     "event": "#44d3d4",

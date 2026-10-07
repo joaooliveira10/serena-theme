@@ -1,0 +1,31 @@
+{
+  "$comment": [
+    "What the TypeScript language server changes on top of the grammar for the samples in this folder (semantic highlighting).",
+    "Each entry is [line, column, text, role, italic]: line from 1, column from 0, role as in src/variants/*.mjs.",
+    "Recorded with TypeScript 6.0.3 (the version bundled with VS Code) and the rules of the Serena themes: parameters are",
+    "recolored where they are used, a constant that holds a function takes the function color, and a class after \"new\"",
+    "takes the type color. When a sample changes, open it in VS Code with a Serena theme, compare with",
+    "\"Developer: Inspect Editor Tokens and Scopes\" and update the entries; render.mjs stops when an entry no longer matches the text."
+  ],
+  "Cart.tsx": [
+    [9, 15, "setOpen", "func", false],
+    [10, 16, "items", "param", true],
+    [10, 44, "sum", "param", true],
+    [10, 50, "item", "param", true],
+    [11, 28, "freeFrom", "param", true],
+    [13, 6, "items", "param", true],
+    [18, 9, "items", "param", true],
+    [21, 8, "items", "param", true],
+    [21, 43, "item", "param", true],
+    [21, 58, "item", "param", true]
+  ],
+  "api.ts": [
+    [9, 52, "value", "param", true],
+    [13, 22, "Map", "type", false],
+    [18, 34, "category", "param", true],
+    [21, 62, "category", "param", true],
+    [22, 27, "Error", "type", false],
+    [25, 19, "category", "param", true],
+    [26, 39, "category", "param", true]
+  ]
+}

@@ -1,6 +1,6 @@
 // Serena Icons — v4 FOLDER batch ("v4-folders"), MINIMAL edition.
 //
-// Deliverable: folders = { "<concept id from v4/mapping.json>": { token, badge } }.
+// Deliverable: folders = { "<concept id from mapping.json>": { token, badge } }.
 // Plain strings, no imports. The closed/open silhouettes come from system/folder.mjs
 // (folderIcon(spec, open)); only the colour token and the 7×7 badge (pixels x 9..15,
 // y 9..15) are authored here. Authored with the glyphs.mjs helpers and inlined.
@@ -45,7 +45,7 @@
 //     stroke font; symbols are generic (phone, laptop, window, shield, pointer, anchor …).
 //   * badges are 1px round-capped strokes on pixel centres or integer fills; 45° or 1:2
 //     diagonals (the bolt and the pointer are filled shapes); checked at 1x on
-//     #16171d / #ecedf3; lint clean with render.mjs --strict.
+//     #16171d / #ecedf3.
 
 export const folders = {
 

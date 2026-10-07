@@ -1,6 +1,7 @@
 name: Wrong or missing color
 description: A token in the editor has the wrong color, or something in the VS Code interface looks off.
-labels: ["colors"]
+# GitHub only applies the labels that exist in the repository: "colors" starts to apply once it is created.
+labels: ["bug", "colors"]
 body:
   - type: markdown
     attributes:

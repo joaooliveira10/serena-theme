@@ -1,2 +1,17 @@
 node_modules/
 *.vsix
+
+# Local files that must never reach the public repository
+.env
+.env.*
+!.env.example
+*.log
+*.pem
+*.key
+chrome-profile/
+.DS_Store
+Thumbs.db
+.claude/
+.vscode/*
+!.vscode/launch.json
+.vscode-test/

@@ -1,72 +1,144 @@
-# Serena Theme
+<p align="center">
+  <img src="images/hero.png" width="100%" alt="Serena Dark with Serena Icons: the Explorer, a TypeScript React file in the editor, tabs and the status bar">
+</p>
 
-Calm, harmonious color themes for VS Code — **Serena Dark**, **Serena Dark Vivid**, **Serena Light**, **Serena Light Vivid**, **Serena High Contrast** and **Serena High Contrast Light** — plus **Serena Icons**, a matching file and folder icon theme in two editions. Each color has the same meaning in every variant, so you can switch between them without relearning anything.
+<p align="center">
+  <b>Serena: calm pastel themes for VS Code where every color keeps one meaning.</b><br>
+  Six color themes (dark, light, vivid, high contrast) and two matching icon themes.
+</p>
 
-![Serena Dark](images/screenshots/serena-dark.png)
+<p align="center">
+  <a href="https://marketplace.visualstudio.com/items?itemName=joaoangello.serena-theme"><img src="https://vsmarketplacebadges.dev/version-short/joaoangello.serena-theme.svg?label=VS%20Marketplace&color=7b489e&labelColor=1b1c23" alt="Visual Studio Marketplace version"></a>
+  <a href="https://open-vsx.org/extension/joaoangello/serena-theme"><img src="https://img.shields.io/open-vsx/v/joaoangello/serena-theme?label=Open%20VSX&color=7b489e&labelColor=1b1c23" alt="Open VSX version"></a>
+  <a href="https://vscode.dev/theme/joaoangello.serena-theme/Serena%20Dark"><img src="https://img.shields.io/badge/preview%20in-vscode.dev-7b489e?labelColor=1b1c23" alt="Preview in vscode.dev"></a>
+</p>
 
-## Color themes
+<details>
+<summary><b>Português</b>: leia a descrição em português</summary>
+
+Família de temas para o VS Code, harmônica e confortável: **Serena Dark** (escuro suave, tons pastel), **Serena Dark Vivid** (fundo um pouco mais escuro, cores mais vivas), **Serena Light** (claro, sem o branco puro que ofusca) e **Serena Light Vivid** (mesmo fundo claro, cores mais vivas), além de **Serena High Contrast** e **Serena High Contrast Light** (alto contraste: toda a sintaxe com 7:1 ou mais no fundo do editor). Cada cor tem o mesmo significado em todas as variantes.
+
+Inclui o tema de ícones em duas edições, com 284 ícones de arquivo e 101 de pasta, que reconhecem 1.013 extensões, 1.497 nomes de arquivo, 240 linguagens e 764 nomes de pasta: **Serena Icons** (com logos reconhecíveis redesenhados na paleta) e **Serena Icons Minimal** (só desenhos originais).
+
+Para instalar: abra as extensões (`Ctrl+Shift+X`), procure `serena-theme` e clique em **Install** em **Serena — Calm Pastel Theme & Icons**, de João Angello. Para ativar: `Ctrl+K Ctrl+T` e escolha um tema Serena; para os ícones, **Preferences: File Icon Theme** e **Serena Icons** ou **Serena Icons Minimal**.
+
+</details>
+
+## Why Serena
+
+Every Serena color has one job: keywords are purple, functions blue and strings green in all six themes, so switching between dark, light and high contrast never means relearning your code. Every syntax color is measured against the editor background, comments included: at least 4.5:1 in the four regular themes and at least 7:1 (WCAG AAA) in the two high contrast ones. The file and folder icons are drawn in the same palette, so the Explorer and the editor look like one product.
+
+![The nine syntax roles (keywords, functions, strings, numbers, types, properties, tags, parameters, comments) in each of the six Serena themes](images/palette.png)
+
+## Install
+
+1. Open the Extensions view (`Ctrl+Shift+X`, macOS `⇧⌘X`), search for `serena-theme` and select **Install** on **Serena — Calm Pastel Theme & Icons** by João Angello. From a terminal: `code --install-extension joaoangello.serena-theme`.
+2. Color theme: press `Ctrl+K Ctrl+T` (macOS `⌘K ⌘T`) and pick a Serena theme.
+3. Icons: run **Preferences: File Icon Theme** from the Command Palette and pick **Serena Icons** or **Serena Icons Minimal**.
+
+Serena is also on [Open VSX](https://open-vsx.org/extension/joaoangello/serena-theme) for VSCodium, Cursor and other editors that use that registry. To see it before installing, [open Serena Dark in vscode.dev](https://vscode.dev/theme/joaoangello.serena-theme/Serena%20Dark): it runs in the browser.
+
+<details>
+<summary><b>Follow the system</b>: switch between dark, light and high contrast automatically</summary>
+
+Add this to your `settings.json`:
+
+```jsonc
+{
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredDarkColorTheme": "Serena Dark",
+  "workbench.preferredLightColorTheme": "Serena Light",
+  "workbench.preferredHighContrastColorTheme": "Serena High Contrast",
+  "workbench.preferredHighContrastLightColorTheme": "Serena High Contrast Light"
+}
+```
+
+The two high contrast lines take effect when the operating system turns high contrast on (`window.autoDetectHighContrast`, enabled by default). Details are in the VS Code documentation: [Automatically switch based on OS color scheme](https://code.visualstudio.com/docs/configure/themes#_automatically-switch-based-on-os-color-scheme).
+
+</details>
+
+## Six themes
 
 | Theme | Best for |
 |---|---|
-| **Serena Dark** | Soft dark background with pastel tones, for long sessions. |
-| **Serena Dark Vivid** | Same background, livelier and more energetic colors. |
-| **Serena Light** | Light theme with a slightly cool background (no glaring pure white). |
-| **Serena Light Vivid** | Same light background, more saturated colors. |
-| **Serena High Contrast** | Near-black background, every syntax color at 7:1 or more (WCAG AAA), outlined panels and a strong focus ring — for low vision. |
-| **Serena High Contrast Light** | White background with the same 7:1 rule and outlines. |
+| **Serena&nbsp;Dark** | Soft dark background with pastel tones, for long sessions. |
+| **Serena&nbsp;Dark&nbsp;Vivid** | A slightly darker background with more saturated colors. |
+| **Serena&nbsp;Light** | A slightly cool off-white background, without the glare of pure white. |
+| **Serena&nbsp;Light&nbsp;Vivid** | The same light background with more saturated colors. |
+| **Serena&nbsp;High&nbsp;Contrast** | Near-black background for low vision. Every syntax color is at 7:1 or more (WCAG AAA) on the editor background; find, word and bracket highlights are drawn as outlines, so they do not lower it; panels are outlined and the focus ring is strong. |
+| **Serena&nbsp;High&nbsp;Contrast&nbsp;Light** | White background with the same 7:1 rule and outlines. |
 
-![Serena Dark Vivid](images/screenshots/serena-dark-vivid.png)
+**Serena Light**
 
 ![Serena Light](images/screenshots/serena-light.png)
 
+<details>
+<summary><b>The other five themes</b></summary>
+
+**Serena Dark**
+
+![Serena Dark](images/screenshots/serena-dark.png)
+
+**Serena Dark Vivid**
+
+![Serena Dark Vivid](images/screenshots/serena-dark-vivid.png)
+
+**Serena Light Vivid**
+
 ![Serena Light Vivid](images/screenshots/serena-light-vivid.png)
+
+**Serena High Contrast**
 
 ![Serena High Contrast](images/screenshots/serena-high-contrast.png)
 
+**Serena High Contrast Light**
+
 ![Serena High Contrast Light](images/screenshots/serena-high-contrast-light.png)
 
-Every theme also styles the parts of VS Code people use every day: AI chat and inline suggestions, tests, notebooks, the merge editor, the terminal, the source control graph and the status bar.
+</details>
+
+Every theme also styles the parts of VS Code used every day: AI chat and inline suggestions, tests, the debugger, the merge editor, the terminal, the source control graph and the status bar.
 
 ## Serena Icons
 
-Icons for **284 file types and 101 folders**, with separate versions for dark, light and high contrast themes. They work with any color theme. Two editions:
+284 file icons and 101 folder icons, matched to 1,013 file extensions, 1,497 file names, 240 language modes and 764 folder names. Every icon is drawn for dark, light and high contrast themes, and the icon themes work with any color theme. Two editions:
 
-- **Serena Icons** — recognizable logos for 81 file types (JavaScript, TypeScript, React, Angular, Svelte, Nuxt, HTML, CSS, Tailwind, Git, PHP, Laravel, Ruby, Django, Jupyter, NuGet, Maven, CMake, Zig, Storybook, Cypress, Prettier, Yarn, pnpm, Bun, Deno, Markdown and more), redrawn in the Serena palette. Where a brand's guidelines don't allow recoloring or altering its logo (Python, Go, Docker, GitHub, Rust, Kotlin, Node, Claude…), an original icon that evokes it is used instead.
-- **Serena Icons Minimal** — original artwork only: calm monograms and symbols, no third-party logos.
+- **Serena Icons**: recognizable logos for 68 file types and 8 folders (JavaScript, TypeScript, Angular, Svelte, Nuxt, HTML, CSS, Tailwind, Git, PHP, Laravel, Ruby, NuGet, CMake, Zig, Storybook, Prettier, Yarn, pnpm, Deno, Markdown and more), redrawn in the Serena palette. Where a brand's rules forbid recoloring or altering its logo, or require permission (Python, Go, Docker, GitHub, Rust, Kotlin, Node.js, React and others), the file type gets an original icon instead.
+- **Serena Icons Minimal**: original artwork only. Monograms and symbols, no third-party logos.
 
-![Serena Icons (logos)](images/screenshots/serena-icons.png)
+![Serena Icons: file and folder icons with logos on Serena Dark, and the original icons of other languages and tools on Serena Light](images/screenshots/serena-icons.png)
 
-![Serena Icons Minimal](images/screenshots/serena-icons-minimal.png)
+<details>
+<summary><b>Serena Icons Minimal</b>: the edition without logos</summary>
 
-## Install and activate
+![Serena Icons Minimal: the same files in both editions, more file kinds, and the icons on the two high contrast themes](images/screenshots/serena-icons-minimal.png)
 
-1. Open the Extensions view (`Ctrl+Shift+X`), search for **Serena Theme** and select **Install**. From a terminal: `code --install-extension joaoangello.serena-theme`.
-2. Color theme: `Ctrl+K Ctrl+T` (**Preferences: Color Theme**) and pick a Serena theme.
-3. Icons: **Preferences: File Icon Theme** in the Command Palette, then **Serena Icons** or **Serena Icons Minimal**.
-
-It also works in [vscode.dev](https://vscode.dev), and it is on [Open VSX](https://open-vsx.org/extension/joaoangello/serena-theme) for VSCodium, Cursor and other editors that use that registry.
+</details>
 
 ## One meaning per color
 
 | Color | Used for |
 |---|---|
-| Lavender | keywords, logical and comparison operators |
+| Lavender / purple | keywords, logical and comparison operators (grey in C#, Rust, Swift and a few other languages, where the grammar or the language server reports every operator the same way) |
 | Blue | functions and methods |
 | Green | strings |
 | Peach / orange | numbers, constants, enum members, attributes |
 | Sand / ochre | types, classes, interfaces, components |
 | Teal | properties, fields, JSON/YAML keys |
-| Pink | HTML tags, `this` / `self` |
+| Pink | HTML tags, `this` / `self` (in C#, Dart and Scala, `this` / `base` / `super` are lavender italic and `true` / `false` / `null` are lavender: their language servers report them as keywords) |
 | Rose italic | parameters |
 
-Syntax coverage was reviewed language by language, including semantic highlighting from the main language servers:
+Syntax was reviewed language by language, including semantic highlighting from the main language servers:
 
-- **C#, Java, JavaScript, TypeScript, Go, Python, YAML** — in depth (Roslyn, Pylance, TypeScript classic and tsgo, gopls).
-- **Rust, C, C++, Kotlin, Swift, Dart, Scala, Groovy, Zig, PHP, Ruby, Lua, R, Elixir, Perl, Bash, PowerShell, SQL, Vue, Svelte, Astro, Angular, Dockerfile, Makefile, TOML, INI, Terraform/HCL, GraphQL, XML, Markdown, CSS/SCSS/Less, HTML.**
+- **In depth:** C#, Java, JavaScript, TypeScript, Go, Python and YAML (Roslyn, Pylance, TypeScript classic and tsgo, gopls).
+- **Also covered:** Rust, C, C++, Kotlin, Swift, Dart, Scala, Groovy, Zig, PHP, Ruby, Lua, R, Elixir, Perl, Bash, PowerShell, SQL, Vue, Svelte, Astro, Angular, Dockerfile, Makefile, TOML, INI, Terraform/HCL, GraphQL, XML, Markdown, CSS/SCSS/Less and HTML, plus `.env`, diff and log files.
 
-## Recommended settings
+## Settings
 
-Add these to your `settings.json` to get everything the theme offers:
+<details>
+<summary><b>Recommended settings</b>: bracket colors, linked editing and Go semantic highlighting</summary>
+
+Add these to your `settings.json` to get everything the themes offer:
 
 ```jsonc
 {
@@ -89,11 +161,14 @@ Add these to your `settings.json` to get everything the theme offers:
 }
 ```
 
-Bracket shortcuts: `Ctrl+Shift+\` jumps to the matching bracket; `Shift+Alt+Right` expands the selection to the next pair.
+Bracket shortcuts: `Ctrl+Shift+\` (macOS `⇧⌘\`) jumps to the matching bracket; `Shift+Alt+Right` (macOS `⌃⇧⌘→`) expands the selection.
 
-## Prefer no italics?
+</details>
 
-Serena uses italics for comments, parameters, `this`/`self`, attributes and decorators. To turn them off for all Serena themes:
+<details>
+<summary><b>Prefer no italics?</b> Settings that turn them off in every Serena theme</summary>
+
+Serena uses italics for comments, parameters, `this`/`self`, attributes and decorators. To turn them off in all Serena themes, add this to your `settings.json`:
 
 <!-- no-italics:start -->
 ```jsonc
@@ -105,7 +180,7 @@ Serena uses italics for comments, parameters, `this`/`self`, attributes and deco
           "scope": [
             "comment", "punctuation.definition.comment", "string.comment",
             "variable.parameter",
-            "variable.language.this", "variable.language.self", "variable.language.super", "variable.language.special.self", "variable.language.special.cls", "variable.parameter.function.language.special.self", "variable.parameter.function.language.special.cls",
+            "variable.language.this", "variable.language.self", "variable.language.super", "variable.language.special.self", "variable.language.special.cls", "variable.parameter.function.language.special.self", "variable.parameter.function.language.special.cls", "variable.language.java",
             "entity.other.attribute-name",
             "entity.other.attribute-name.pseudo-class", "entity.other.attribute-name.pseudo-element",
             "punctuation.decorator", "punctuation.definition.decorator", "punctuation.definition.annotation",
@@ -180,16 +255,14 @@ Serena uses italics for comments, parameters, `this`/`self`, attributes and deco
 ```
 <!-- no-italics:end -->
 
-## Em português
-
-Família de temas para o VS Code, harmônica e confortável: **Serena Dark** (escuro suave, tons pastel), **Serena Dark Vivid** (mesmo fundo, cores mais vivas), **Serena Light** (claro, sem o branco puro que ofusca) e **Serena Light Vivid** (claro, cores mais vivas), além de **Serena High Contrast** e **Serena High Contrast Light** (alto contraste: toda a sintaxe com 7:1 ou mais). Inclui o tema de ícones em duas edições: **Serena Icons** (com logos reconhecíveis redesenhados na paleta) e **Serena Icons Minimal** (só desenhos originais). Cada cor tem o mesmo significado em todas as variantes.
-
-Para ativar: `Ctrl+K Ctrl+T` e escolha um tema Serena; para os ícones, **Preferences: File Icon Theme** e **Serena Icons** ou **Serena Icons Minimal**.
+</details>
 
 ## Feedback
 
-Found a token with the wrong color or a file without an icon? [Open an issue](https://github.com/joaooliveira10/serena-theme/issues) with the language and a small code sample.
+Found a token with the wrong color or a file without an icon? [Open an issue](https://github.com/joaooliveira10/serena-theme/issues) with the language and a small code sample. If Serena works for you, a rating on the [Marketplace](https://marketplace.visualstudio.com/items?itemName=joaoangello.serena-theme&ssr=false#review-details) or on [Open VSX](https://open-vsx.org/extension/joaoangello/serena-theme/reviews), or a star on [GitHub](https://github.com/joaooliveira10/serena-theme), helps other people find it. What changed in each version is in the [changelog](CHANGELOG.md).
 
 ## License
 
-[MIT](LICENSE). The logo icons in **Serena Icons** are derived from third-party logos and keep their own licences and trademarks — see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). All product names, logos and brands are property of their respective owners and are used for identification only.
+[MIT](LICENSE). The logo icons in **Serena Icons** are derived from third-party logos and keep their own licenses and trademarks: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). All product names, logos and brands are property of their respective owners and are used for identification only.
+
+The images on this page are rendered from the theme and icon files of this repository. The editor font in them is Cascadia Code.

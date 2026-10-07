@@ -15,7 +15,7 @@
     "icon.foreground": "#9a9cb0",
     "editor.background": "#181921",
     "editor.foreground": "#d4d4dc",
-    "editorLineNumber.foreground": "#4c5067",
+    "editorLineNumber.foreground": "#60647c",
     "editorLineNumber.activeForeground": "#9a9cb0",
     "editorCursor.foreground": "#b582ef",
     "editor.lineHighlightBackground": "#1f202a",
@@ -57,10 +57,10 @@
     "editorBracketPairGuide.activeBackground6": "#41a5c1d9",
     "editor.linkedEditingBackground": "#f16e921f",
     "editorBracketMatch.background": "#d4d4dc14",
-    "editorBracketMatch.border": "#d4d4dc59",
+    "editorBracketMatch.border": "#d4d4dc5d",
     "editorOverviewRuler.bracketMatchForeground": "#9a9cb099",
-    "editorCodeLens.foreground": "#6c7089",
-    "editorInlayHint.foreground": "#6c7089",
+    "editorCodeLens.foreground": "#7f818c",
+    "editorInlayHint.foreground": "#8589a3",
     "editorInlayHint.background": "#9a9cb014",
     "editorError.foreground": "#f16e92",
     "editorWarning.foreground": "#dfbb5b",
@@ -109,9 +109,9 @@
     "tab.activeForeground": "#d4d4dc",
     "tab.activeBorderTop": "#b582ef",
     "tab.inactiveBackground": "#13141b",
-    "tab.inactiveForeground": "#6c7089",
+    "tab.inactiveForeground": "#787d96",
     "tab.unfocusedActiveForeground": "#9a9cb0",
-    "tab.unfocusedInactiveForeground": "#53566b",
+    "tab.unfocusedInactiveForeground": "#5e6176",
     "tab.border": "#13141b",
     "tab.unfocusedActiveBorderTop": "#3c3f52",
     "activityBar.background": "#13141b",
@@ -165,7 +165,7 @@
     "titleBar.activeBackground": "#13141b",
     "titleBar.activeForeground": "#9a9cb0",
     "titleBar.inactiveBackground": "#13141b",
-    "titleBar.inactiveForeground": "#53566b",
+    "titleBar.inactiveForeground": "#5e6176",
     "titleBar.border": "#13141b",
     "statusBar.background": "#13141b",
     "statusBar.foreground": "#9a9cb0",
@@ -179,12 +179,12 @@
     "panel.background": "#13141b",
     "panel.border": "#232531",
     "panelTitle.activeForeground": "#d4d4dc",
-    "panelTitle.inactiveForeground": "#6c7089",
+    "panelTitle.inactiveForeground": "#787d96",
     "panelTitle.activeBorder": "#b582ef",
     "input.background": "#1c1d26",
     "input.border": "#313448",
     "input.foreground": "#d4d4dc",
-    "input.placeholderForeground": "#6c7089",
+    "input.placeholderForeground": "#80849d",
     "inputOption.activeBorder": "#b582ef",
     "inputValidation.errorBackground": "#331e26",
     "inputValidation.errorBorder": "#f16e92",
@@ -223,7 +223,8 @@
     "gitDecoration.renamedResourceForeground": "#4ed8dc",
     "gitDecoration.conflictingResourceForeground": "#eb9163",
     "gitDecoration.submoduleResourceForeground": "#9a9cb0",
-    "gitDecoration.ignoredResourceForeground": "#5a5d74",
+    "gitDecoration.ignoredResourceForeground": "#6c7087",
+    "git.blame.editorDecorationForeground": "#7f818c",
     "diffEditor.insertedLineBackground": "#22822133",
     "diffEditor.insertedTextBackground": "#326e4940",
     "diffEditor.removedLineBackground": "#a91e3533",
@@ -266,7 +267,7 @@
     "terminal.ansiMagenta": "#b582ef",
     "terminal.ansiCyan": "#4ed8dc",
     "terminal.ansiWhite": "#d4d4dc",
-    "terminal.ansiBrightBlack": "#6c7089",
+    "terminal.ansiBrightBlack": "#787d96",
     "terminal.ansiBrightRed": "#f99baf",
     "terminal.ansiBrightGreen": "#bbf9a6",
     "terminal.ansiBrightYellow": "#f5da7a",
@@ -296,6 +297,7 @@
     "chat.editedFileForeground": "#79b6f4",
     "chat.linesAddedForeground": "#a3e28d",
     "chat.linesRemovedForeground": "#f16e92",
+    "chat.mcpCompatibilityWarningForeground": "#dfbb5b",
     "chat.requestBorder": "#9a9cb026",
     "chat.requestCodeBorder": "#79b6f440",
     "chat.slashCommandBackground": "#79b6f429",
@@ -412,7 +414,7 @@
     "tab.activeModifiedBorder": "#79b6f4",
     "terminal.findMatchBackground": "#dfbb5b33",
     "terminal.findMatchBorder": "#dfbb5bcc",
-    "terminal.initialHintForeground": "#6e7289",
+    "terminal.initialHintForeground": "#787d94",
     "terminalCommandGuide.foreground": "#3c3f52",
     "terminalOverviewRuler.cursorForeground": "#9a9cb0cc",
     "terminalStickyScrollHover.background": "#232531",
@@ -507,7 +509,8 @@
         "string",
         "string.quoted",
         "string.template",
-        "punctuation.definition.string"
+        "punctuation.definition.string",
+        "property.value.dotenv"
       ],
       "settings": {
         "foreground": "#a3e28d"
@@ -555,6 +558,25 @@
       ],
       "settings": {
         "foreground": "#9a9cb0"
+      }
+    },
+    {
+      "name": "Python regex: referências \\1 e (?P=nome) como no JS (a gramática as marca como tag)",
+      "scope": [
+        "entity.name.tag.backreference.regexp",
+        "entity.name.tag.named.backreference.regexp"
+      ],
+      "settings": {
+        "foreground": "#b582ef"
+      }
+    },
+    {
+      "name": "Python regex: nome do grupo (?P<nome>) como no JS (a gramática o marca como tag)",
+      "scope": [
+        "entity.name.tag.named.group.regexp"
+      ],
+      "settings": {
+        "foreground": "#d4d4dc"
       }
     },
     {
@@ -660,7 +682,8 @@
         "variable.language.special.self",
         "variable.language.special.cls",
         "variable.parameter.function.language.special.self",
-        "variable.parameter.function.language.special.cls"
+        "variable.parameter.function.language.special.cls",
+        "variable.language.java"
       ],
       "settings": {
         "foreground": "#f16e92",
@@ -680,7 +703,10 @@
         "entity.name.tag.yaml",
         "support.type.property-name",
         "variable.other.constant.property",
-        "keyword.other.definition.ini"
+        "keyword.other.definition.ini",
+        "variable.key.dotenv",
+        "variable.other.env",
+        "variable.interpolation.dotenv"
       ],
       "settings": {
         "foreground": "#4ed8dc"
@@ -895,7 +921,8 @@
     {
       "name": "Diff",
       "scope": [
-        "markup.inserted"
+        "markup.inserted",
+        "markup.inserted punctuation.definition.inserted"
       ],
       "settings": {
         "foreground": "#a3e28d"
@@ -903,7 +930,8 @@
     },
     {
       "scope": [
-        "markup.deleted"
+        "markup.deleted",
+        "markup.deleted punctuation.definition.deleted"
       ],
       "settings": {
         "foreground": "#f16e92"
@@ -911,10 +939,58 @@
     },
     {
       "scope": [
-        "markup.changed"
+        "markup.changed",
+        "markup.changed punctuation.definition.changed"
       ],
       "settings": {
         "foreground": "#79b6f4"
+      }
+    },
+    {
+      "name": "Diff: cabeçalhos (diff --git, --- a/arquivo, +++ b/arquivo)",
+      "scope": [
+        "meta.diff.header"
+      ],
+      "settings": {
+        "foreground": "#b582ef"
+      }
+    },
+    {
+      "name": "Diff: intervalo do hunk (@@ -12,9 +12,9 @@)",
+      "scope": [
+        "meta.diff.range"
+      ],
+      "settings": {
+        "foreground": "#4ed8dc"
+      }
+    },
+    {
+      "name": "Diff: linha index (index 3f2a9c1..b7d4e02) discreta, na cor de comentário",
+      "scope": [
+        "meta.diff.index"
+      ],
+      "settings": {
+        "foreground": "#7c8099"
+      }
+    },
+    {
+      "name": "Log: erros e exceções na cor de erro",
+      "scope": [
+        "log.error",
+        "log.exception",
+        "log.exceptiontype"
+      ],
+      "settings": {
+        "foreground": "#f16e92"
+      }
+    },
+    {
+      "name": "Log: avisos na cor de aviso",
+      "scope": [
+        "log.warning"
+      ],
+      "settings": {
+        "foreground": "#dfbb5b"
       }
     },
     {
@@ -926,6 +1002,16 @@
       "settings": {
         "foreground": "#f16e92",
         "fontStyle": "underline"
+      }
+    },
+    {
+      "name": "Git commit: assunto entre 51 e 72 colunas é só um aviso (acima de 72 continua como erro)",
+      "scope": [
+        "invalid.deprecated.line-too-long.git-commit"
+      ],
+      "settings": {
+        "foreground": "#dfbb5b",
+        "fontStyle": ""
       }
     },
     {
@@ -983,7 +1069,7 @@
       }
     },
     {
-      "name": "C#: operadores lógicos, de comparação e ?? (o Roslyn envia todos como 'operator')",
+      "name": "C#: operadores lógicos, de comparação e ?? (o Roslyn envia 'operator' ou 'operatorOverloaded'; os dois ficam como pontuação)",
       "scope": [
         "keyword.operator.logical.cs",
         "keyword.operator.comparison.cs",
@@ -1048,7 +1134,9 @@
         "comment.block.documentation.cs punctuation.definition.tag.cs",
         "comment.block.documentation.cs punctuation.separator.equals.cs",
         "comment.block.documentation.cs string.quoted.double.cs",
-        "comment.block.documentation.cs punctuation.definition.string"
+        "comment.block.documentation.cs punctuation.definition.string",
+        "comment.block.documentation.cs constant.character.entity",
+        "comment.block.documentation.cs constant.character.entity punctuation.definition.constant"
       ],
       "settings": {
         "foreground": "#7c8099"
@@ -1311,12 +1399,11 @@
       }
     },
     {
-      "name": "JSX/TSX: entidades HTML (&nbsp; &amp;) como escapes",
+      "name": "Entidades HTML/XML (&nbsp; &amp;) como escapes",
       "scope": [
-        "constant.character.entity.js",
-        "constant.character.entity.tsx",
-        "constant.character.entity.js punctuation.definition.entity",
-        "constant.character.entity.tsx punctuation.definition.entity"
+        "constant.character.entity",
+        "constant.character.entity punctuation.definition.entity",
+        "constant.character.entity punctuation.definition.constant"
       ],
       "settings": {
         "foreground": "#4ed8dc"
@@ -1334,7 +1421,9 @@
     {
       "name": "Python 3.12+: declaração de parâmetros de tipo (class C[T], def f[T], type X[T])",
       "scope": [
-        "variable.parameter.type.typevar"
+        "variable.parameter.type.typevar",
+        "variable.parameter.type.paramspec",
+        "variable.parameter.type.typevartuple"
       ],
       "settings": {
         "foreground": "#dfbb5b",
@@ -1677,6 +1766,16 @@
       "settings": {
         "foreground": "#f16e92",
         "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Swift: parâmetros genéricos e associatedtype na declaração (os usos já são tipo)",
+      "scope": [
+        "variable.language.generic-parameter.swift",
+        "variable.language.associatedtype.swift"
+      ],
+      "settings": {
+        "foreground": "#dfbb5b"
       }
     },
     {
@@ -2829,6 +2928,10 @@
     "interface": "#dfbb5b",
     "namespace": "#dfbb5b",
     "function": "#79b6f4",
+    "function.declaration": {
+      "foreground": "#79b6f4",
+      "italic": false
+    },
     "method": "#79b6f4",
     "variable:python": "#d4d4dc",
     "variable.readonly:python": "#eb9163",
@@ -2845,6 +2948,7 @@
       "foreground": "#79b6f4",
       "italic": true
     },
+    "operatorOverloaded": "#9a9cb0",
     "delegate": "#dfbb5b",
     "constant": "#eb9163",
     "event": "#4ed8dc",

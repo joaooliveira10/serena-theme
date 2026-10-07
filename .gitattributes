@@ -1,3 +1,11 @@
 * text=auto eol=lf
 *.png binary
 *.vsix binary
+
+# For GitHub only (language statistics and pull request diffs); Git itself ignores these.
+# icons/ and themes/ are written by "node build.mjs": their diffs are collapsed in pull requests.
+icons/** linguist-generated
+themes/** linguist-generated
+# Sample files for trying the themes: not counted as the languages of this project.
+exemplos/** linguist-documentation
+scripts/store/samples/** linguist-documentation

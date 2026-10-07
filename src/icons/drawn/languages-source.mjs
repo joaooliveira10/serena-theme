@@ -1,9 +1,8 @@
-// Serena Icons — batch "languages-source" (32 file icons). Generated from
-// icons/work/languages-source/languages-source.mjs (helpers from system/glyphs.mjs), inlined as
-// plain strings so this module has no imports. Markup uses {{token}} placeholders.
-// Exemplar ids (csharp, java, javascript, typescript*, python, go) are byte-identical to exemplars.mjs.
-// The drawn markup is the source of truth for colour: mapping.json `token`/`accent` for these ids
-// are synced from it (first {{token}} = token, second = accent).
+// Serena Icons — batch "languages-source" (32 file icons).
+// Hand-maintained: written with the helpers of system/glyphs.mjs and inlined as
+// plain strings, so this module has no imports. Markup uses {{token}} placeholders.
+// The drawn markup is the only source of an icon's colour (first {{token}} = main token,
+// second = accent).
 // python-test (PY chip + check) is for Python *source* test plumbing only: conftest.py, noxfile.py.
 // INI runner configs (pytest.ini, .pytest.ini, tox.ini) are config, never chips (style.md §6):
 // they map to test-config (rose flask) like jest/vitest/playwright configs.
